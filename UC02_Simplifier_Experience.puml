@@ -1,0 +1,58 @@
+@startuml UC02_Simplifier_Experience
+!define RECTANGLE class
+
+title Cas d'utilisation UC02: Simplifier l'expérience utilisateur (B02)
+
+left to right direction
+
+actor "Citoyen" as citoyen
+
+package "Plateforme RVSQ" {
+  usecase "UC02: Simplifier l'expérience utilisateur" as UC02
+  usecase "UC02.1: S'authentifier de manière sécurisée" as UC02_1
+  usecase "UC02.2: Utiliser l'autocomplétion des formulaires" as UC02_2
+  usecase "UC02.3: Gérer les préférences personnelles" as UC02_3
+  usecase "UC02.4: Consulter l'historique" as UC02_4
+  usecase "Stocker les données sécurisées" as storage
+}
+
+package "Systèmes externes" {
+  usecase "Service d'authentification gouvernementale" as auth
+}
+
+' Relations principales
+citoyen --> UC02
+
+' Décomposition du cas principal
+UC02 ..> UC02_1 : <<include>>
+UC02 ..> UC02_2 : <<include>>
+UC02 ..> UC02_3 : <<include>>
+
+' Relations avec systèmes externes
+UC02_1 ..> auth : <<include>>
+UC02_2 ..> storage : <<include>>
+UC02_3 ..> storage : <<include>>
+
+' Extensions
+UC02_4 ..> UC02_3 : <<extend>> : Consultation optionnelle
+
+note right of UC02
+  **Objectif**: Offrir une expérience utilisateur
+  fluide et personnalisée
+  
+  **Prérequis**: 
+  - Service d'authentification opérationnel
+  - Système de stockage sécurisé configuré
+  
+  **Résultat**: 
+  - Connexion sécurisée établie
+  - Formulaires pré-remplis
+  - Préférences sauvegardées
+  
+  **Caractéristiques associées**:
+  - CAR04: Connexion sécurisée gouvernementale
+  - CAR05: Autocomplétion des formulaires
+  - CAR06: Sauvegarde des préférences
+end note
+
+@enduml

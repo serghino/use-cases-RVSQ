@@ -1,0 +1,27 @@
+@startuml
+!define C4P https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+!includeurl C4P
+
+Person(citoyen, "Citoyen", "Personne qui prend rendez-vous ou téléconsultation")
+Person(medecin, "Médecin", "Offre des consultations aux citoyens")
+Person(infirmier, "Infirmière", "Offre des consultations aux citoyens")
+Person(adjoint, "Adjoint administratif", "Gère les rendez-vous et les annulations")
+Person(adminSys, "Administrateur système", "Gère et supervise la plateforme RVSQ")
+
+System(rvsq, "Plateforme RVSQ", "Permet de gérer les rendez-vous médicaux et la téléconsultation") 
+System_Ext(auth, "Service d’authentification gouvernementale", "Valide l'identité des citoyens")
+System_Ext(dme, "Cliniques / Hôpitaux (DME)", "Fournit disponibilité et reçoit annulations")
+System_Ext(msg, "Services de messagerie", "Envoie des rappels et confirmations")
+System_Ext(teams, "Microsoft Teams", "Plateforme de téléconsultation vidéo")
+
+Rel(citoyen, rvsq, "Prend rendez-vous / accède à téléconsultation")
+Rel(medecin, rvsq, "Fournit téléconsultation / met à jour disponibilités")
+Rel(infirmier, rvsq, "Fournit téléconsultation / met à jour disponibilités")
+Rel(adjoint, rvsq, "Gère rendez-vous et annulations")
+Rel(adminSys, rvsq, "Configure et supervise le système")
+
+Rel(rvsq, auth, "Valide identité des citoyens")
+Rel(rvsq, dme, "Consulte disponibilités / transmet annulations")
+Rel(rvsq, msg, "Envoie rappels / confirmations")
+Rel(rvsq, teams, "Crée réunion et récupère lien de téléconsultation")
+@enduml

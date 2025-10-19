@@ -1,0 +1,61 @@
+@startuml UC01_Reserver_RDV
+!define RECTANGLE class
+
+title Cas d'utilisation UC01: Réserver rapidement et efficacement un rendez-vous (B01)
+
+left to right direction
+
+actor "Citoyen" as citoyen
+
+package "Plateforme RVSQ" {
+  usecase "UC01: Réserver un rendez-vous" as UC01
+  usecase "UC01.1: Rechercher un professionnel" as UC01_1
+  usecase "UC01.2: Filtrer les résultats" as UC01_2
+  usecase "UC01.3: Sélectionner un créneau" as UC01_3
+  usecase "UC01.4: Confirmer la réservation" as UC01_4
+  usecase "UC01.5: Recevoir confirmation" as UC01_5
+}
+
+package "Systèmes externes" {
+  usecase "Authentifier le citoyen" as auth
+  usecase "Consulter disponibilités DME" as dme
+  usecase "Envoyer notification" as notif
+}
+
+' Relations principales
+citoyen --> UC01
+
+' Décomposition du cas principal
+UC01 ..> UC01_1 : <<include>>
+UC01 ..> UC01_2 : <<include>>
+UC01 ..> UC01_3 : <<include>>
+UC01 ..> UC01_4 : <<include>>
+UC01 ..> UC01_5 : <<include>>
+
+' Relations avec systèmes externes
+UC01_1 ..> auth : <<include>>
+UC01_1 ..> dme : <<include>>
+UC01_5 ..> notif : <<include>>
+
+' Extensions
+UC01_2 ..> UC01_1 : <<extend>> : Affinage de recherche
+
+note right of UC01
+  **Objectif**: Permettre au citoyen de réserver 
+  rapidement un rendez-vous médical
+  
+  **Prérequis**: 
+  - Disponibilités publiées par les cliniques
+  - Service d'authentification opérationnel
+  
+  **Résultat**: 
+  - Rendez-vous confirmé
+  - Notifications envoyées
+  
+  **Caractéristiques associées**:
+  - CAR01: Moteur de recherche centralisé
+  - CAR02: Filtres avancés 
+  - CAR03: Confirmation et rappels automatiques
+end note
+
+@enduml

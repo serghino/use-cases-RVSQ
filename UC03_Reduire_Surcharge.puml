@@ -1,0 +1,61 @@
+@startuml UC03_Reduire_Surcharge
+!define RECTANGLE class
+
+title Cas d'utilisation UC03: Réduire la surcharge des secrétariats (B03)
+
+left to right direction
+
+actor "Adjoint administratif" as adjoint
+actor "Médecin" as medecin
+actor "Infirmière" as infirmier
+
+package "Plateforme RVSQ" {
+  usecase "UC03: Réduire la surcharge des secrétariats" as UC03
+  usecase "UC03.1: Publier automatiquement les disponibilités" as UC03_1
+  usecase "UC03.2: Gérer les annulations" as UC03_2
+  usecase "UC03.3: Consulter les réservations" as UC03_3
+  usecase "UC03.4: Modifier les plages horaires" as UC03_4
+}
+
+package "Systèmes externes" {
+  usecase "Intégration DME" as dme
+  usecase "Envoyer notification" as notif
+}
+
+' Relations principales
+adjoint --> UC03
+medecin --> UC03_1
+infirmier --> UC03_1
+
+' Décomposition du cas principal
+UC03 ..> UC03_1 : <<include>>
+UC03 ..> UC03_2 : <<include>>
+UC03 ..> UC03_3 : <<include>>
+
+' Relations avec systèmes externes
+UC03_1 ..> dme : <<include>>
+UC03_2 ..> dme : <<include>>
+UC03_2 ..> notif : <<include>>
+
+' Extensions
+UC03_4 ..> UC03_1 : <<extend>> : Modification manuelle
+
+note right of UC03
+  **Objectif**: Automatiser la gestion des disponibilités
+  et des annulations pour réduire la charge administrative
+  
+  **Prérequis**: 
+  - DME intégré et configuré
+  - Service de messagerie opérationnel
+  
+  **Résultat**: 
+  - Disponibilités publiées automatiquement
+  - Annulations gérées et synchronisées
+  - Notifications envoyées automatiquement
+  
+  **Caractéristiques associées**:
+  - CAR07: Intégration DME pour disponibilités
+  - CAR08: Gestion automatisée des annulations
+end note
+
+@enduml
