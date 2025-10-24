@@ -1,0 +1,44 @@
+@startuml UC06_Securiser_Donnees
+!define RECTANGLE class
+title Cas d'utilisation UC06 : Garantir la sécurité et la transparence des données (B06)
+
+left to right direction
+
+actor "Citoyen" as citoyen
+actor "Service d’authentification" as auth
+actor "Clinique" as clinique
+
+package "Plateforme RVSQ" {
+  usecase "UC06 : Garantir la sécurité et la transparence des données" as UC06
+  usecase "UC06.1 : Authentifier l’utilisateur" as UC06_1
+  usecase "UC06.2 : Accéder aux données sécurisées" as UC06_2
+  usecase "UC06.3 : Journaliser et tracer les accès" as UC06_3
+  usecase "UC06.4 : Auditer et contrôler la conformité" as UC06_4
+}
+
+package "Systèmes externes" {
+  usecase "Vérifier identité" as id_check
+  usecase "Effectuer audit MSSS/RAMQ" as audit
+}
+
+citoyen --> UC06
+clinique --> UC06
+
+UC06 ..> UC06_1 : <<include>>
+UC06 ..> UC06_2 : <<include>>
+UC06 ..> UC06_3 : <<include>>
+UC06 ..> UC06_4 : <<include>>
+
+UC06_1 ..> auth : <<include>>
+UC06_4 ..> audit : <<include>>
+
+note right of UC06
+**Objectif :** Protéger les informations sensibles  
+**Résultat :** Données sécurisées et traçabilité assurée  
+**Caractéristiques associées :**  
+- CAR13 : Protocoles sécurisés  
+- CAR14 : Journalisation des accès  
+- CAR15 : Contrôles basés sur les rôles  
+- CAR16 : Audits réguliers  
+end note
+@enduml

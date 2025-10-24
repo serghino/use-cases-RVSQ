@@ -1,0 +1,42 @@
+@startuml UC04_Optimiser_Places_Horaires
+!define RECTANGLE class
+title Cas d'utilisation UC04 : Optimiser l’utilisation des plages horaires (B04)
+
+left to right direction
+
+actor "Clinique" as clinique
+actor "Citoyen" as citoyen
+
+package "Plateforme RVSQ" {
+  usecase "UC04 : Optimiser l’utilisation des plages horaires" as UC04
+  usecase "UC04.1 : Détecter une plage vacante" as UC04_1
+  usecase "UC04.2 : Identifier les patients correspondants" as UC04_2
+  usecase "UC04.3 : Envoyer les notifications" as UC04_3
+  usecase "UC04.4 : Réserver automatiquement" as UC04_4
+}
+
+package "Systèmes externes" {
+  usecase "Synchroniser avec le DME" as dme
+  usecase "Envoyer notification" as notif
+}
+
+clinique --> UC04
+citoyen --> UC04
+
+UC04 ..> UC04_1 : <<include>>
+UC04 ..> UC04_2 : <<include>>
+UC04 ..> UC04_3 : <<include>>
+UC04 ..> UC04_4 : <<include>>
+
+UC04_1 ..> dme : <<include>>
+UC04_3 ..> notif : <<include>>
+UC04_4 ..> dme : <<include>>
+
+note right of UC04
+**Objectif :** Maximiser l’utilisation des créneaux libres  
+**Résultat :** Notifications automatiques envoyées, plages remplies  
+**Caractéristiques associées :**  
+- CAR09 : Notifications automatiques  
+- CAR10 : Synchronisation en temps réel  
+end note
+@enduml
