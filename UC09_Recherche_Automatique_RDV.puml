@@ -1,0 +1,40 @@
+@startuml UC09_Recherche_Automatique_RDV
+!define RECTANGLE class
+title Cas d'utilisation UC09 : Rechercher automatiquement des rendez-vous 24/24 (B09)
+
+left to right direction
+
+actor "Citoyen" as citoyen
+
+package "Plateforme RVSQ" {
+  usecase "UC09 : Rechercher automatiquement des rendez-vous" as UC09
+  usecase "UC09.1 : Définir les critères de recherche" as UC09_1
+  usecase "UC09.2 : Exécuter la recherche continue" as UC09_2
+  usecase "UC09.3 : Notifier le citoyen" as UC09_3
+  usecase "UC09.4 : Confirmer ou ignorer" as UC09_4
+}
+
+package "Systèmes externes" {
+  usecase "Consulter disponibilités DME" as dme
+  usecase "Envoyer notification" as notif
+}
+
+citoyen --> UC09
+
+UC09 ..> UC09_1 : <<include>>
+UC09 ..> UC09_2 : <<include>>
+UC09 ..> UC09_3 : <<include>>
+UC09 ..> UC09_4 : <<include>>
+
+UC09_2 ..> dme : <<include>>
+UC09_3 ..> notif : <<include>>
+UC09_4 ..> dme : <<include>>
+
+note right of UC09
+**Objectif :** Offrir une recherche automatisée de rendez-vous  
+**Résultat :** Citoyen notifié dès qu’un créneau correspond  
+**Caractéristiques associées :**  
+- CAR22 : Recherche continue 24/24  
+- CAR23 : Notification et confirmation instantanée  
+end note
+@enduml
