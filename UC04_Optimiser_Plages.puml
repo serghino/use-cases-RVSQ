@@ -1,0 +1,60 @@
+@startuml UC04_Optimiser_Plages
+!define RECTANGLE class
+
+title Cas d'utilisation UC04: Optimiser l'utilisation des plages horaires (B04)
+
+left to right direction
+
+actor "Citoyen" as citoyen
+actor "Adjoint administratif" as adjoint
+
+package "Plateforme RVSQ" {
+  usecase "UC04: Optimiser l'utilisation des plages horaires" as UC04
+  usecase "UC04.1: Envoyer des notifications de rappel" as UC04_1
+  usecase "UC04.2: Synchroniser les disponibilités en temps réel" as UC04_2
+  usecase "UC04.3: Gérer les anulations" as UC04_3
+  usecase "UC04.4: Proposer des créneaux libérés" as UC04_4
+}
+
+package "Systèmes externes" {
+  usecase "Services de messagerie" as msg
+  usecase "Intégration DME" as dme
+}
+
+' Relations principales
+citoyen --> UC04_4
+adjoint --> UC04_3
+
+' Décomposition du cas principal
+UC04 ..> UC04_1 : <<include>>
+UC04 ..> UC04_2 : <<include>>
+UC04 ..> UC04_3 : <<include>>
+
+' Relations avec systèmes externes
+UC04_1 ..> msg : <<include>>
+UC04_2 ..> dme : <<include>>
+UC04_4 ..> msg : <<include>>
+
+' Extensions
+UC04_4 ..> UC04_3 : <<extend>> : Réaffectation automatique
+
+note right of UC04
+  **Objectif**: Maximiser l'utilisation des plages horaires
+  disponibles et minimiser les créneaux perdus
+  
+  **Prérequis**: 
+  - Services de messagerie opérationnels
+  - Intégration DME configurée
+  - Rendez-vous planifiés dans le système
+  
+  **Résultat**: 
+  - Notifications automatiques envoyées
+  - Disponibilités synchronisées en temps réel
+  - Créneaux libérés rapidement réaffectés
+  
+  **Caractéristiques associées**:
+  - CAR09: Notifications automatiques
+  - CAR10: Synchronisation temps réel
+end note
+
+@enduml
