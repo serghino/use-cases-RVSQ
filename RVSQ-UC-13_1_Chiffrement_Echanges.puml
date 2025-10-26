@@ -1,0 +1,32 @@
+@startuml RVSQ-UC-13_1_Chiffrement_Echanges
+left to right direction
+actor "Citoyen" as a1
+
+package "Plateforme RVSQ" {
+  usecase "RVSQ-UC-13.1 : Chiffrement échanges" as UC131
+  usecase "Négocier session TLS" as UC131_1
+  usecase "Traiter la requête" as UC131_2
+  usecase "Journaliser l’échange" as UC131_3
+}
+
+package "Systèmes Externes" {
+  usecase "Service d’authentification" as AUTH
+  usecase "DME" as DME
+}
+
+a1 --> UC131
+
+UC131 ..> UC131_1 : <<include>>
+UC131 ..> UC131_2 : <<include>>
+UC131 ..> UC131_3 : <<include>>
+UC131_1 ..> AUTH : <<include>>
+UC131_2 ..> DME : <<include>>
+
+note top of UC131
+Assurer le chiffrement en transit et des échanges sécurisés.
+end note
+
+note bottom of UC131
+Caractéristique associée : CAR13
+end note
+@enduml

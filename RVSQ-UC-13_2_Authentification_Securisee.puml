@@ -1,0 +1,30 @@
+@startuml RVSQ-UC-13_2_Authentification_Securisee
+left to right direction
+actor "Citoyen" as a1
+
+package "Plateforme RVSQ" {
+  usecase "RVSQ-UC-13.2 : Authentification sécurisée" as UC132
+  usecase "Démarrer authentification" as UC132_1
+  usecase "Vérifier identité" as UC132_2
+  usecase "Établir session" as UC132_3
+}
+
+package "Systèmes Externes" {
+  usecase "Service d’authentification" as AUTH
+}
+
+a1 --> UC132
+
+UC132 ..> UC132_1 : <<include>>
+UC132 ..> UC132_2 : <<include>>
+UC132 ..> UC132_3 : <<include>>
+UC132_2 ..> AUTH : <<include>>
+
+note top of UC132
+Mettre en place une authentification robuste et traçable.
+end note
+
+note bottom of UC132
+Caractéristique associée : CAR13
+end note
+@enduml

@@ -1,0 +1,32 @@
+@startuml RVSQ-UC-09_2_Notifier_Cliniques
+left to right direction
+actor "Citoyen" as a1
+
+package "Plateforme RVSQ" {
+  usecase "RVSQ-UC-09.2 : Notifier cliniques" as UC092
+  usecase "Identifier destinataires cliniques" as UC092_1
+  usecase "Construire message" as UC092_2
+  usecase "Envoyer notification" as UC092_3
+}
+
+package "Systèmes Externes" {
+  usecase "DME" as DME
+  usecase "Service de messagerie" as MSG
+}
+
+a1 --> UC092
+
+UC092 ..> UC092_1 : <<include>>
+UC092 ..> UC092_2 : <<include>>
+UC092 ..> UC092_3 : <<include>>
+UC092_1 ..> DME : <<include>>
+UC092_3 ..> MSG : <<include>>
+
+note top of UC092
+Informer automatiquement les cliniques lors d’événements opérationnels.
+end note
+
+note bottom of UC092
+Caractéristique associée : CAR09
+end note
+@enduml

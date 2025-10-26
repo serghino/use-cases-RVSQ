@@ -1,0 +1,32 @@
+@startuml RVSQ-UC-09_1_Notifier_Citoyens
+left to right direction
+actor "Citoyen" as a1
+
+package "Plateforme RVSQ" {
+  usecase "RVSQ-UC-09.1 : Notifier citoyens" as UC091
+  usecase "Identifier citoyens éligibles" as UC091_1
+  usecase "Construire message" as UC091_2
+  usecase "Envoyer notification" as UC091_3
+}
+
+package "Systèmes Externes" {
+  usecase "DME" as DME
+  usecase "Service de messagerie" as MSG
+}
+
+a1 --> UC091
+
+UC091 ..> UC091_1 : <<include>>
+UC091 ..> UC091_2 : <<include>>
+UC091 ..> UC091_3 : <<include>>
+UC091_1 ..> DME : <<include>>
+UC091_3 ..> MSG : <<include>>
+
+note top of UC091
+Envoyer automatiquement des notifications aux citoyens éligibles.
+end note
+
+note bottom of UC091
+Caractéristique associée : CAR09
+end note
+@enduml

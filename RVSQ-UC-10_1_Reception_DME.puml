@@ -1,0 +1,28 @@
+@startuml RVSQ-UC-10_1_Reception_DME
+left to right direction
+actor "Citoyen" as a1
+
+package "Plateforme RVSQ" {
+  usecase "RVSQ-UC-10.1 : Réception DME" as UC101
+  usecase "Recevoir événement DME" as UC101_1
+  usecase "Valider et intégrer" as UC101_2
+}
+
+package "Systèmes Externes" {
+  usecase "DME" as DME
+}
+
+a1 --> UC101
+
+UC101 ..> UC101_1 : <<include>>
+UC101 ..> UC101_2 : <<include>>
+UC101_1 ..> DME : <<include>>
+
+note top of UC101
+Réceptionner et intégrer les événements de disponibilités provenant des DME.
+end note
+
+note bottom of UC101
+Caractéristique associée : CAR10
+end note
+@enduml
