@@ -1,49 +1,45 @@
-# Use Case Documentation Workflow
+# Documentation des Cas d'Utilisation - Système RVSQ
 
->This repository provides a structured approach for documenting each use case with both a specification and a PlantUML diagram.
+> Ce dépôt contient la documentation structurée des cas d'utilisation pour le système de Rendez-Vous de Santé Québec (RVSQ), incluant les spécifications détaillées et les diagrammes PlantUML.
 
-## 1. Specification Document
+## 📋 Structure du Projet
 
-For each use case (e.g., UC01), create a Markdown file named `UC01_Specification.md`.
+Chaque cas d'utilisation est documenté à l'aide de deux fichiers complémentaires :
 
-**Content to include:**
-- **Title and ID** (e.g., UC01: Réserver un RDV)
-- **Actors involved**
-- **Preconditions**
-- **Main scenario** (step-by-step)
-- **Alternative scenarios**
-- **Postconditions**
+1. **Fichier de spécification** (`.md`) : Documentation textuelle détaillée
+2. **Diagramme PlantUML** (`.puml`) : Représentation visuelle des interactions
 
-**Example:**
+## 📝 Format de Documentation
+
+### 1. Document de Spécification
+
+Chaque cas d'utilisation possède un fichier Markdown nommé selon le format `UC[XX]_Specification.md`.
+
+**Structure requise :**
+
 ```markdown
-# UC01: Réserver un RDV
+# UC[XX]: [Titre du cas d'utilisation]
 
 ## Acteurs
-- Utilisateur
-- Système de réservation
+- Liste des acteurs impliqués
 
 ## Préconditions
-- L'utilisateur est authentifié
+- Conditions préalables à l'exécution du cas d'utilisation
 
-## Scénario principal
-1. L'utilisateur demande à réserver un RDV
-2. Le système propose des créneaux disponibles
-3. L'utilisateur sélectionne un créneau
-4. Le système confirme la réservation
+## Flux d'événements
 
-## Scénarios alternatifs
-- Aucun créneau disponible
-- L'utilisateur annule la demande
+### Flux de base
+1. Étape 1
+2. Étape 2
+3. ...
+
+### Flux alternatifs
+- Description des scénarios alternatifs
 
 ## Postconditions
-- Un RDV est réservé
+- État du système après l'exécution
 ```
 
-## 2. PlantUML Diagram
+## 📖 Cours
 
-For each use case, create a PlantUML file named `UC01_Reserver_RDV.puml`.
-
-**Content to include:**
-- Actors and system boundaries
-- Interactions (arrows for steps)
-- Optionally, notes for alternative flows
+Ce projet est réalisé dans le cadre du cours de **Software Requirements** à l'**École de Technologie Supérieure (ETS)**, Montréal, Canada.
