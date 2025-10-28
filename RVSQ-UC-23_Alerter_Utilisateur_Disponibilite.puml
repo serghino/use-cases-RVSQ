@@ -1,0 +1,30 @@
+@startuml RVSQ-UC-23_Alerter_Utilisateur_Disponibilite
+left to right direction
+actor "Citoyen" as a1
+
+package "Plateforme RVSQ" {
+  usecase "RVSQ-UC-23 : Notification instantanée" as UC23
+  usecase "Sélectionner canal" as UC23_1
+  usecase "Construire message" as UC23_2
+  usecase "Envoyer" as UC23_3
+}
+
+package "Systèmes Externes" {
+  usecase "Service de messagerie" as MSG
+}
+
+a1 --> UC23
+
+UC23 ..> UC23_1 : <<include>>
+UC23 ..> UC23_2 : <<include>>
+UC23 ..> UC23_3 : <<include>>
+UC23_3 ..> MSG : <<include>>
+
+note top of UC23
+Alerter immédiatement l’utilisateur lorsqu’une correspondance est trouvée.
+end note
+
+note bottom of UC23
+Caractéristique associée : CAR23
+end note
+@enduml

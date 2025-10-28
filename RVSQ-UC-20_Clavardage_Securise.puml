@@ -1,0 +1,30 @@
+@startuml RVSQ-UC-20_Clavardage_Securise
+left to right direction
+actor "Citoyen" as a1
+
+package "Plateforme RVSQ" {
+  usecase "RVSQ-UC-20 : Clavardage sécurisé" as UC20
+  usecase "Initier session" as UC20_1
+  usecase "Établir canal chiffré" as UC20_2
+  usecase "Échanger messages" as UC20_3
+}
+
+package "Systèmes Externes" {
+  usecase "Service d’authentification" as AUTH
+}
+
+a1 --> UC20
+
+UC20 ..> UC20_1 : <<include>>
+UC20 ..> UC20_2 : <<include>>
+UC20 ..> UC20_3 : <<include>>
+UC20_1 ..> AUTH : <<include>>
+
+note top of UC20
+Établir un canal de clavardage sécurisé entre citoyen et professionnel.
+end note
+
+note bottom of UC20
+Caractéristique associée : CAR20
+end note
+@enduml

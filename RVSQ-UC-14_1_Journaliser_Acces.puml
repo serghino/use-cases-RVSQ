@@ -1,0 +1,27 @@
+@startuml RVSQ-UC-14_1_Journaliser_Acces
+left to right direction
+actor "Auditeur" as a1
+
+package "Plateforme RVSQ" {
+  usecase "RVSQ-UC-14.1 : Journaliser accès" as UC141
+  usecase "Capturer événement" as UC141_1
+  usecase "Stocker immuablement" as UC141_2
+}
+
+package "Systèmes Externes" {
+  
+}
+
+a1 --> UC141
+
+UC141 ..> UC141_1 : <<include>>
+UC141 ..> UC141_2 : <<include>>
+
+note top of UC141
+Journaliser toutes les opérations sensibles pour l’audit.
+end note
+
+note bottom of UC141
+Caractéristique associée : CAR14
+end note
+@enduml

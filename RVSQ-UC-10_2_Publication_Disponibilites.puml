@@ -1,0 +1,27 @@
+@startuml RVSQ-UC-10_2_Publication_Disponibilites
+left to right direction
+actor "Citoyen" as a1
+
+package "Plateforme RVSQ" {
+  usecase "RVSQ-UC-10.2 : Publication MAJ" as UC102
+  usecase "Détecter modification index" as UC102_1
+  usecase "Mettre à jour vues/caches" as UC102_2
+}
+
+package "Systèmes Externes" {
+  
+}
+
+a1 --> UC102
+
+UC102 ..> UC102_1 : <<include>>
+UC102 ..> UC102_2 : <<include>>
+
+note top of UC102
+Publier rapidement l’état des disponibilités côté recherche.
+end note
+
+note bottom of UC102
+Caractéristique associée : CAR10
+end note
+@enduml
