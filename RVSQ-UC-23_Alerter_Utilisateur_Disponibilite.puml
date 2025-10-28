@@ -1,29 +1,46 @@
 @startuml RVSQ-UC-23_Alerter_Utilisateur_Disponibilite
 left to right direction
 
+' --- Acteurs
 actor "Plateforme RVSQ" as RVSQActor <<system>>
+actor "Citoyen" as Citoyen <<person>>
 
 rectangle "Plateforme RVSQ" {
   usecase "RVSQ-UC-23 : Alerter l'utilisateur" as UC23
   usecase "Construire message" as UC23_A
   usecase "Sélectionner canal" as UC23_B
   usecase "Envoyer notification" as UC23_C
+  usecase "Fallback de canal" as UC23_D
+  usecase "Regroupement des notifications" as UC23_E
 }
 
 rectangle "Systèmes Externes" {
-  usecase "Citoyen" as Citoyen
   usecase "Service de messagerie" as MSG
 }
 
+' --- Relations principales
 RVSQActor --> UC23
 UC23 ..> UC23_A : <<include>>
 UC23 ..> UC23_B : <<include>>
 UC23 ..> UC23_C : <<include>>
 UC23_C ..> MSG : <<include>>
+
+' --- Interaction secondaire (réception)
 UC23 --> Citoyen
 
+' --- Extensions conditionnelles
+UC23 ..> UC23_D : <<extend>> : Canal préféré indisponible
+UC23 ..> UC23_E : <<extend>> : Politique anti-spam active
+
 note top of UC23
-  **Caractéristique associée :** CAR23  
-  **Objectif :** alerter immédiatement le citoyen lors d'une disponibilité détectée.
+  **Caractéristique associée :** CAR23
+  **Objectif :** alerter immédiatement le citoyen lors d'une disponibilité détectée,
+  selon ses préférences et la disponibilité des canaux.
+end note
+
+note bottom of UC23
+  Les extensions « Fallback de canal » et « Regroupement des notifications »
+  s'exécutent uniquement lorsque le canal principal est indisponible
+  ou qu'une politique anti-spam est active.
 end note
 @enduml

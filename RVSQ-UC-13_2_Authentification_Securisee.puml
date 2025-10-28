@@ -1,6 +1,11 @@
 @startuml RVSQ-UC-13_2_Authentification_Securisee
 left to right direction
 
+' --- Acteurs humains
+actor "Citoyen" as Citoyen <<person>>
+actor "Administrateur système" as Admin <<person>>
+
+' --- Acteur système externe
 actor "Service d'authentification gouvernementale" as SAG <<system>>
 
 rectangle "Plateforme RVSQ" {
@@ -8,23 +13,29 @@ rectangle "Plateforme RVSQ" {
   usecase "Vérifier identité" as UC132_A
   usecase "Établir session sécurisée" as UC132_B
   usecase "Journaliser accès" as UC132_C
-}
-
-rectangle "Systèmes Externes" {
-  usecase "Administrateur système" as Admin
-  usecase "Citoyen" as Citoyen
+  usecase "Revalidation MFA / Jeton expiré" as UC132_D
 }
 
 SAG --> UC132
+Citoyen --> UC132
+Admin --> UC132_C
+
+' --- Inclusions principales
 UC132 ..> UC132_A : <<include>>
 UC132 ..> UC132_B : <<include>>
 UC132 ..> UC132_C : <<include>>
 
-UC132_B ..> Citoyen : <<include>>
-UC132_C ..> Admin : <<include>>
+' --- Extension conditionnelle
+UC132 ..> UC132_D : <<extend>> : Jeton expiré ou MFA requis
 
 note top of UC132
-  **Caractéristique associée :** CAR13  
-  **Objectif :** authentification forte et traçable entre RVSQ et services intégrés.
+  **Caractéristique associée :** CAR13
+  **Objectif :** Authentification forte et traçable entre RVSQ et services intégrés.
+end note
+
+note bottom of UC132
+  Authentification via le Service d'authentification gouvernementale (SAG)
+  et établissement de sessions sécurisées pour les utilisateurs RVSQ.
+  *L'extension « Revalidation MFA / Jeton expiré » s'exécute uniquement lors d'une expiration ou d'un changement d'appareil.*
 end note
 @enduml

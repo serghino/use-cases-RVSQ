@@ -1,30 +1,36 @@
 @startuml RVSQ-UC-13_1_Chiffrement_Echanges
 left to right direction
 
-actor "Administrateur système" as Admin <<person>>
-
+actor "Administrateur système" as Admin
 rectangle "Plateforme RVSQ" {
   usecase "RVSQ-UC-13.1 : Chiffrement des échanges" as UC131
   usecase "Configurer TLS 1.3 + PFS" as UC131_A
-  usecase "Activer HSTS" as UC131_B
-  usecase "Vérifier conformité MSSS/RAMQ" as UC131_C
+  usecase "Tester conformité MSSS/RAMQ" as UC131_B
+  usecase "Vérifier connecteurs DME" as UC131_C
+  usecase "Journaliser résultats" as UC131_D
+  usecase "Renouveler certificat expiré" as UC131_E
 }
 
-rectangle "Systèmes externes" {
+rectangle "Systèmes Externes" {
   usecase "DME" as DME
-  usecase "Service d'authentification gouvernementale" as SAG
+  usecase "Service Authentification" as SAG
 }
 
 Admin --> UC131
 UC131 ..> UC131_A : <<include>>
 UC131 ..> UC131_B : <<include>>
 UC131 ..> UC131_C : <<include>>
+UC131 ..> UC131_D : <<include>>
+UC131 ..> UC131_E : <<extend>> : Renouvellement automatique
 
-UC131_A ..> DME : <<include>>
-UC131_C ..> SAG : <<include>>
+UC131_A ..> SAG : <<include>>
+UC131_C ..> DME : <<include>>
 
 note top of UC131
-  **Caractéristique associée :** CAR13  
-  **Objectif :** garantir le chiffrement en transit entre RVSQ et les systèmes externes.
+  **Caractéristique associée : CAR13**
+end note
+
+note bottom of UC131
+  Configuration et maintien du chiffrement des échanges RVSQ ↔ systèmes externes.
 end note
 @enduml

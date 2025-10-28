@@ -1,20 +1,27 @@
 @startuml RVSQ-UC-20_Clavardage_Securise
 left to right direction
 
+' --- Acteurs principaux (humains)
 actor "Citoyen" as Citoyen <<person>>
 actor "Professionnel de santé" as Pro <<person>>
+
+' --- Acteurs secondaires (systèmes)
+actor "Plateforme RVSQ" as RVSQActor <<system>>
 
 rectangle "Plateforme RVSQ" {
   usecase "RVSQ-UC-20 : Clavardage sécurisé" as UC20
   usecase "Initier session" as UC20_A
   usecase "Authentifier participants" as UC20_B
   usecase "Échanger messages chiffrés" as UC20_C
+  usecase "Reconnexion sécurisée" as UC20_D
+  usecase "Clôture automatique et rapport de modération" as UC20_E
 }
 
 rectangle "Systèmes Externes" {
   usecase "Service de messagerie sécurisé" as MSG
 }
 
+' --- Interactions principales
 Citoyen --> UC20
 Pro --> UC20
 UC20 ..> UC20_A : <<include>>
@@ -22,8 +29,19 @@ UC20 ..> UC20_B : <<include>>
 UC20 ..> UC20_C : <<include>>
 UC20_C ..> MSG : <<include>>
 
+' --- Extensions conditionnelles
+UC20 ..> UC20_D : <<extend>> : Déconnexion d'un participant
+UC20 ..> UC20_E : <<extend>> : Contenu inapproprié détecté
+
 note top of UC20
   **Caractéristique associée :** CAR20
-  **Objectif :** permettre un échange sécurisé entre citoyen et professionnel.
+  **Objectif :** Permettre un échange sécurisé entre citoyen et professionnel de santé
+  via un canal chiffré, supervisé et journalisé selon la Loi 25 et les directives MSSS/RAMQ.
+end note
+
+note bottom of UC20
+  Les extensions « Reconnexion sécurisée » et
+  « Clôture automatique et rapport de modération »
+  sont déclenchées uniquement selon les conditions d'exception (A1, A2).
 end note
 @enduml

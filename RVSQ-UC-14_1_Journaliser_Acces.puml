@@ -10,27 +10,34 @@ rectangle "Plateforme RVSQ" {
   usecase "Capturer action sensible" as UC141_A
   usecase "Enregistrer dans journal immuable" as UC141_B
   usecase "Rendre accessible à l'audit" as UC141_C
+  usecase "Extraire journaux pour audit" as UC141_D
 }
 
 rectangle "Systèmes Externes" {
   usecase "Stockage sécurisé des journaux" as STOR
 }
 
+' --- Relations principales
 RVSQActor --> UC141
 UC141 ..> UC141_A : <<include>>
 UC141 ..> UC141_B : <<include>>
 UC141 ..> UC141_C : <<include>>
 
+' --- Extension optionnelle
+UC141 ..> UC141_D : <<extend>> : Sur demande d'audit
+
+' --- Interactions externes
 UC141_B ..> STOR : <<include>>
 Auditeur --> UC141_C
-Admin --> UC141
+Admin --> UC141_D
 
 note top of UC141
   **Caractéristique associée :** CAR14
-  **Objectif :** journaliser tous les accès et actions sensibles dans un journal immuable et horodaté.
+  **Objectif :** Journaliser tous les accès et actions sensibles dans un journal immuable et horodaté.
 end note
 
 note bottom of UC141
   Enregistrement automatique et traçabilité complète des actions utilisateurs et systèmes.
+  *L'extension « Extraire journaux pour audit » s'exécute uniquement sur demande d'un auditeur ou administrateur.*
 end note
 @enduml

@@ -5,9 +5,10 @@ actor "Plateforme RVSQ" as RVSQActor <<system>>
 
 rectangle "Plateforme RVSQ" {
   usecase "RVSQ-UC-13.3 : Vérification d'intégrité" as UC133
-  usecase "Valider signature et empreinte" as UC133_A
-  usecase "Rejeter altération détectée" as UC133_B
-  usecase "Consigner événement" as UC133_C
+  usecase "Vérifier signature numérique" as UC133_A
+  usecase "Comparer empreintes et horodatages" as UC133_B
+  usecase "Consigner vérification" as UC133_C
+  usecase "Revalidation automatique" as UC133_D
 }
 
 rectangle "Systèmes Externes" {
@@ -19,12 +20,16 @@ RVSQActor --> UC133
 UC133 ..> UC133_A : <<include>>
 UC133 ..> UC133_B : <<include>>
 UC133 ..> UC133_C : <<include>>
+UC133 ..> UC133_D : <<extend>> : Signature invalide
 
 UC133_A ..> DME : <<include>>
-UC133_B ..> MSG : <<include>>
+UC133_A ..> MSG : <<include>>
 
 note top of UC133
-  **Caractéristique associée :** CAR13  
-  **Objectif :** garantir l'intégrité et la traçabilité des messages échangés.
+  **Caractéristique associée : CAR13**
+end note
+
+note bottom of UC133
+  Validation cryptographique de l'intégrité des messages échangés entre RVSQ et les systèmes externes.
 end note
 @enduml
