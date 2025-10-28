@@ -1,0 +1,84 @@
+@startuml RVSQ_UC_03_Confirmer_Rappeler_RDV
+left to right direction
+skinparam packageStyle rectangle
+
+actor "Système RVSQ\n(automatique)" as Systeme
+actor "Citoyen" as Citoyen
+actor "Adjoint\nadministratif" as Adjoint
+
+rectangle "Plateforme RVSQ" {
+  usecase "RVSQ-UC-03: Envoyer automatiquement\nune confirmation et des rappels" as UC03
+  usecase "Détecter réservation\nde rendez-vous" as Detecter
+  usecase "Générer message\nde confirmation" as GenererMsg
+  usecase "Envoyer confirmation\n(courriel, SMS)" as EnvoyerConfirm
+  usecase "Programmer rappels\nautomatiques" as ProgrammerRappel
+  usecase "Surveiller confirmation\ndu citoyen" as Surveiller
+  usecase "Envoyer rappel\n7 jours avant" as Rappel7j
+  usecase "Envoyer rappel\n24h avant" as Rappel24h
+  usecase "Alerter l'adjoint\nsi pas de confirmation" as AlerterAdjoint
+}
+
+rectangle "Systèmes Externes" {
+  usecase "Services de messagerie\n(courriel, SMS)" as Messagerie
+}
+
+rectangle "Actions du Citoyen" {
+  usecase "Confirmer présence" as Confirmer
+  usecase "Annuler rendez-vous" as Annuler
+}
+
+' Relations principales - Le système est l'acteur principal
+Systeme --> UC03
+
+UC03 ..> Detecter : <<include>>
+UC03 ..> GenererMsg : <<include>>
+UC03 ..> EnvoyerConfirm : <<include>>
+UC03 ..> ProgrammerRappel : <<include>>
+UC03 ..> Surveiller : <<include>>
+
+EnvoyerConfirm --> Messagerie : utilise
+Rappel7j --> Messagerie : utilise
+Rappel24h --> Messagerie : utilise
+
+' Extensions basées sur l'absence de confirmation
+UC03 .> Rappel7j : <<extend>>\n[pas de confirmation\naprès 7 jours]
+UC03 .> Rappel24h : <<extend>>\n[pas de confirmation\n24h avant]
+Rappel24h ..> AlerterAdjoint : <<include>>\n[si toujours pas\nde confirmation]
+
+' L'adjoint reçoit l'alerte
+AlerterAdjoint --> Adjoint : notifie
+
+' Actions du citoyen en réponse
+Citoyen --> Confirmer
+Citoyen --> Annuler
+
+Confirmer ..> UC03 : répond à
+Annuler ..> UC03 : répond à
+
+note right of UC03
+  Caractéristique associée:
+  CAR03 - Envoyer automatiquement
+  une confirmation et des rappels
+  
+  Le système agit de manière
+  autonome et automatique
+end note
+
+note bottom of Messagerie
+  Canaux de communication:
+  • Courriel
+  • SMS
+  • Notification mobile (optionnel)
+end note
+
+note left of Surveiller
+  Calendrier des rappels:
+  • 1er rappel: 7 jours avant
+  • 2e rappel: 24h avant
+  
+  Si toujours pas de confirmation
+  après 24h, alerte envoyée
+  à l'adjoint pour contact manuel
+end note
+
+@enduml

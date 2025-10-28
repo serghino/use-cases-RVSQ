@@ -1,0 +1,38 @@
+@startuml RVSQ-UC-01_Rechercher_un_Rendez_Vous
+left to right direction
+actor "Citoyen" as a1
+
+package "Plateforme RVSQ" {
+  usecase "RVSQ-UC-01 : Rechercher un rendez-vous" as UC01
+  usecase "Définir besoins et spécialité" as UC01_1
+  usecase "Configurer localisation" as UC01_2
+  usecase "Appliquer filtres avancés" as UC01_3
+  usecase "Interroger système centralisé" as UC01_4
+  usecase "Afficher résultats classés" as UC01_5
+  usecase "Modifier critères" as UC01_6
+}
+
+package "Systèmes Externes" {
+  usecase "Système centralisé DME" as DME
+}
+
+a1 --> UC01
+
+UC01 ..> UC01_1 : <<include>>
+UC01 ..> UC01_2 : <<include>>
+UC01 ..> UC01_3 : <<extend>>
+UC01 ..> UC01_4 : <<include>>
+UC01 ..> UC01_5 : <<include>>
+UC01 ..> UC01_6 : <<extend>>
+UC01_4 ..> DME : <<include>>
+
+note top of UC01
+Recherche centralisée de rendez-vous avec critères de base 
+(type de consultation, spécialité, localisation) et 
+filtres avancés optionnels (langue, établissement, disponibilités).
+end note
+
+note bottom of UC01
+Caractéristiques associées : CAR01, CAR02
+end note
+@enduml
