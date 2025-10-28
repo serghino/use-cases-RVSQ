@@ -1,34 +1,35 @@
-RVSQ-UC-10.2 : Publication des mises à jour
+# RVSQ-UC-10.2 – Publication des mises à jour de disponibilités
 
-## BRÈVE DESCRIPTION
-Publier les disponibilités mises à jour afin qu’elles soient visibles immédiatement côté recherche RVSQ.
+## 1. BRÈVE DESCRIPTION
+La **Plateforme RVSQ** publie les disponibilités mises à jour afin qu'elles soient immédiatement visibles pour les citoyens et les professionnels de santé sur l'interface de recherche.
 
-## FLUX D'ÉVÉNEMENTS
+## 2. ACTEURS IMPLIQUÉS
+- **Acteur principal :** Plateforme RVSQ
+- **Acteurs secondaires :** Citoyen, Médecin
 
-### Flux de Base
-1. Détecter une modification validée dans l’index.
-2. Mettre à jour les vues et caches de recherche.
-3. Exposer l’état à jour aux utilisateurs.
+## 3. FLUX D'ÉVÉNEMENTS
+### 3.1 Flux nominal
+1. Détecter une modification validée dans l'index central.
+2. Mettre à jour les caches et vues de recherche.
+3. Exposer les créneaux actualisés sur l'interface.
 4. Journaliser la publication.
 
-### Flux Alternatifs
-- **Cache indisponible** : basculer en lecture directe avec dégradation maîtrisée.
-- **Latence excessive** : déclencher une alerte.
+### 3.2 Flux alternatifs
+- **Cache indisponible :** basculer en lecture directe avec dégradation maîtrisée.
+- **Latence excessive :** générer une alerte d'observabilité.
 
-## EXIGENCES SPÉCIALES
-1. Rafraîchissement quasi temps réel.
-2. Observabilité (métriques de latence/erreur).
-3. Cohérence forte lors de la réservation.
+## 4. EXIGENCES SPÉCIALES
+- **Rafraîchissement :** quasi temps réel.
+- **Observabilité :** métriques de latence/erreur.
+- **Cohérence :** forte lors de la réservation.
 
-## PRÉ-CONDITIONS
-1. Index central à jour.
-2. Infrastructure de cache opérationnelle.
-3. RVSQ disponible.
+## 5. PRÉCONDITIONS
+- Index central à jour.
+- Infrastructure de cache opérationnelle.
 
-## POST-CONDITIONS
-1. Disponibilités visibles immédiatement.
-2. Piste d’audit de publication.
-3. Expérience utilisateur fluide.
+## 6. POSTCONDITIONS
+- Disponibilités visibles immédiatement.
+- Piste d'audit complète.
 
-## CARACTÉRISTIQUE ASSOCIÉE
+## 7. CARACTÉRISTIQUE ASSOCIÉE
 CAR10 – Synchroniser les disponibilités en temps réel avec les cliniques

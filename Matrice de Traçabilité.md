@@ -76,7 +76,7 @@ Ce document établit la traçabilité bidirectionnelle entre :
 **UC principaux** : RVSQ-UC-10.1 (Réception DME) • RVSQ-UC-10.2 (Publication MAJ)  
 **Dépendances** :
 - 🔗 Section 1 (consolidation pour recherche)
-- 🔗 Section 3 (déclenchement de notifications d’annulation/nouveau créneau)
+- 🔗 Section 3 (déclenchement de notifications d'annulation/nouveau créneau)
 - 🔗 Section 4 (sécurité des accès DME, RBAC)
 
 ---
@@ -99,7 +99,7 @@ Ce document établit la traçabilité bidirectionnelle entre :
 **UC principaux** :
 - RVSQ-UC-13.1 (Chiffrement échanges)
 - RVSQ-UC-13.2 (Authentification sécurisée)
-- RVSQ-UC-13.3 (Vérification d’intégrité)
+- RVSQ-UC-13.3 (Vérification d'intégrité)
 - RVSQ-UC-14.1 (Journaliser accès)
 - RVSQ-UC-14.2 (Analyser anomalies)  
   **Dépendances** : Section transversale – encadre toutes les autres

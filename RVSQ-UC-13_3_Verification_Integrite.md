@@ -1,34 +1,35 @@
-RVSQ-UC-13.3 : Vérification d’intégrité
+# RVSQ-UC-13.3 – Vérification d’intégrité
 
-## BRÈVE DESCRIPTION
-Vérifier l’intégrité des messages et données échangés entre RVSQ et les systèmes intégrés.
+## 1. BRÈVE DESCRIPTION
+La **Plateforme RVSQ** garantit l’intégrité des messages échangés avec les systèmes externes (DME, service de messagerie) en validant les signatures, empreintes et horodatages afin de prévenir toute altération des données.
 
-## FLUX D'ÉVÉNEMENTS
+## 2. ACTEURS IMPLIQUÉS
+- **Acteur principal :** Plateforme RVSQ
+- **Acteurs secondaires :** DME, Service de messagerie
 
-### Flux de Base
-1. Recevoir un message externe.
-2. Valider la signature et l’empreinte.
-3. Rejeter et consigner toute altération détectée.
-4. Accepter et traiter les contenus intègres.
+## 3. FLUX D’ÉVÉNEMENTS
+### 3.1 Flux nominal
+1. Recevoir un message signé depuis un système externe.
+2. Vérifier la signature numérique et l’empreinte SHA256.
+3. Comparer les horodatages et la source d’origine.
+4. Accepter le message s’il est valide et consigner la vérification.
 
-### Flux Alternatifs
-- **Signature invalide** : refuser le message, journaliser, alerter.
-- **Horodatage expiré** : appliquer la politique de rejet/renvoi.
+### 3.2 Flux alternatifs
+- **Altération détectée :** rejet du message et notification à l’administrateur.
+- **Signature invalide :** tentative de revalidation ou rejet.
 
-## EXIGENCES SPÉCIALES
-1. Signatures numériques et horodatage.
-2. Journaux inviolables.
-3. Conformité sécurité.
+## 4. EXIGENCES SPÉCIALES
+- **Intégrité :** validation cryptographique systématique.
+- **Traçabilité :** logs d’intégrité archivés 12 mois.
+- **Conformité :** alignement avec CAR13 et Loi 25.
 
-## PRÉ-CONDITIONS
-1. Clés et certificats à jour.
-2. Politique d’horodatage appliquée.
-3. RVSQ opérationnelle.
+## 5. PRÉCONDITIONS
+- Certificats de confiance enregistrés.
+- Mécanisme de signature actif côté DME et messagerie.
 
-## POST-CONDITIONS
-1. Messages validés.
-2. Altérations bloquées.
-3. Traçabilité complète.
+## 6. POSTCONDITIONS
+- Données validées et sécurisées.
+- Alertes émises en cas d’altération.
 
-## CARACTÉRISTIQUE ASSOCIÉE
-CAR13 – Utiliser des protocoles sécurisés pour la récupération et l’échange de données
+## 7. CARACTÉRISTIQUE ASSOCIÉE
+CAR13 – Vérification d’intégrité et traçabilité des échanges.

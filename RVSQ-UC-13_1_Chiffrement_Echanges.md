@@ -1,34 +1,35 @@
-RVSQ-UC-13.1 : Chiffrement des échanges
+# RVSQ-UC-13.1 – Chiffrement des échanges
 
-## BRÈVE DESCRIPTION
-Garantir le chiffrement en transit des communications entre RVSQ et les systèmes externes.
+## 1. BRÈVE DESCRIPTION
+L'**Administrateur système** configure et maintient le chiffrement des communications entre la **Plateforme RVSQ** et les systèmes externes (DME, service d'authentification gouvernementale) afin d'assurer la confidentialité et l'intégrité des données échangées.
 
-## FLUX D'ÉVÉNEMENTS
+## 2. ACTEURS IMPLIQUÉS
+- **Acteur principal :** Administrateur système
+- **Acteurs secondaires :** Plateforme RVSQ, DME, Service d'authentification gouvernementale
 
-### Flux de Base
-1. Initier la connexion.
-2. Négocier TLS 1.3.
-3. Échanger des données chiffrées.
-4. Journaliser les métadonnées de sécurité.
+## 3. FLUX D'ÉVÉNEMENTS
+### 3.1 Flux nominal
+1. Configurer le protocole TLS 1.3 et activer la Perfect Forward Secrecy (PFS).
+2. Activer HSTS sur les interfaces Web de la plateforme RVSQ.
+3. Tester la conformité avec les exigences du MSSS/RAMQ.
+4. Vérifier la compatibilité avec les connecteurs DME.
+5. Journaliser les résultats de test et valider la configuration.
 
-### Flux Alternatifs
-- **Certificat invalide** : refuser la connexion et consigner.
-- **Protocole obsolète** : imposer la mise à niveau.
+### 3.2 Flux alternatifs
+- **Erreur de configuration TLS :** la plateforme bloque les connexions non conformes et notifie l'administrateur.
+- **Certificat expiré :** alerte automatique et renouvellement programmé.
 
-## EXIGENCES SPÉCIALES
-1. TLS 1.3, PFS, HSTS.
-2. Terminateurs redondants.
-3. Conformité MSSS/RAMQ.
+## 4. EXIGENCES SPÉCIALES
+- **Sécurité :** TLS 1.3 + PFS obligatoire.
+- **Traçabilité :** logs signés et horodatés.
+- **Conformité :** respect des standards MSSS/RAMQ et Loi 25.
 
-## PRÉ-CONDITIONS
-1. Certificats valides.
-2. Pare-feu/WAF configurés.
-3. RVSQ disponible.
+## 5. PRÉCONDITIONS
+- Accès administrateur autorisé.
+- Services externes intégrés.
 
-## POST-CONDITIONS
-1. Échanges sécurisés.
-2. Événements consignés.
-3. Demandes non conformes bloquées.
+## 6. POSTCONDITIONS
+- Toutes les communications RVSQ ↔ systèmes externes sont chiffrées et vérifiées.
 
-## CARACTÉRISTIQUE ASSOCIÉE
-CAR13 – Utiliser des protocoles sécurisés pour la récupération et l’échange de données
+## 7. CARACTÉRISTIQUE ASSOCIÉE
+CAR13 – Protocoles sécurisés pour l'échange de données.

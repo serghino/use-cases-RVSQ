@@ -1,32 +1,29 @@
 @startuml RVSQ-UC-22_Recherche_Automatique_Continue
 left to right direction
-actor "Citoyen" as a1
 
-package "Plateforme RVSQ" {
-  usecase "RVSQ-UC-22 : Recherche automatisée 24/24" as UC22
-  usecase "Planifier recherche" as UC22_1
-  usecase "Interroger DME" as UC22_2
-  usecase "Réserver temporairement" as UC22_3
+actor "Plateforme RVSQ" as RVSQActor <<system>>
+
+rectangle "Plateforme RVSQ" {
+  usecase "RVSQ-UC-22 : Recherche automatique continue" as UC22
+  usecase "Lire critères" as UC22_A
+  usecase "Interroger DME" as UC22_B
+  usecase "Notifier citoyen" as UC22_C
 }
 
-package "Systèmes Externes" {
+rectangle "Systèmes Externes" {
   usecase "DME" as DME
-  usecase "Service de messagerie" as MSG
+  usecase "Citoyen" as Citoyen
 }
 
-a1 --> UC22
-
-UC22 ..> UC22_1 : <<include>>
-UC22 ..> UC22_2 : <<include>>
-UC22 ..> UC22_3 : <<include>>
-UC22_2 ..> DME : <<include>>
-UC22_3 ..> MSG : <<include>>
+RVSQActor --> UC22
+UC22 ..> UC22_A : <<include>>
+UC22 ..> UC22_B : <<include>>
+UC22 ..> UC22_C : <<include>>
+UC22_B ..> DME : <<include>>
+UC22_C ..> Citoyen : <<include>>
 
 note top of UC22
-Exécution continue d’une recherche et réservation temporaire.
-end note
-
-note bottom of UC22
-Caractéristique associée : CAR22
+  **Caractéristique associée :** CAR22
+  **Objectif :** exécution continue d'une recherche automatique selon critères enregistrés.
 end note
 @enduml

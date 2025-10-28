@@ -1,34 +1,36 @@
-RVSQ-UC-10.1 : Réception des événements DME
+# RVSQ-UC-10.1 – Réception des événements DME
 
-## BRÈVE DESCRIPTION
-Réceptionner, valider et intégrer les notifications de disponibilités envoyées par les DME.
+## 1. BRÈVE DESCRIPTION
+La **Plateforme RVSQ** réceptionne, valide et intègre les notifications de disponibilités envoyées par les DME afin d'assurer la synchronisation en temps réel des créneaux médicaux.
 
-## FLUX D'ÉVÉNEMENTS
+## 2. ACTEURS IMPLIQUÉS
+- **Acteur principal :** Plateforme RVSQ
+- **Acteurs secondaires :** DME, Administrateur système
 
-### Flux de Base
-1. Recevoir un événement de disponibilité.
-2. Valider l’authenticité et le schéma.
-3. Intégrer l’événement dans l’index central.
-4. Journaliser l’opération.
+## 3. FLUX D'ÉVÉNEMENTS
+### 3.1 Flux nominal
+1. Recevoir un événement de disponibilité transmis par le DME.
+2. Valider l'authenticité et le schéma de la donnée.
+3. Intégrer l'événement dans l'index central de RVSQ.
+4. Journaliser l'opération pour traçabilité.
 
-### Flux Alternatifs
-- **Conflit détecté** : appliquer les règles de résolution.
-- **Source indisponible** : plan de reprise (backoff), marquer l’horodatage de dernière synchro.
+### 3.2 Flux alternatifs
+- **Conflit détecté :** appliquer les règles de résolution définies.
+- **Source indisponible :** appliquer un plan de reprise (backoff) et marquer l'horodatage de dernière synchronisation.
 
-## EXIGENCES SPÉCIALES
-1. Propagation ≤ 5 s.
-2. Disponibilité ≥ 99,9 %.
-3. Journalisation détaillée.
+## 4. EXIGENCES SPÉCIALES
+- **Performance :** propagation ≤ 5 secondes.
+- **Disponibilité :** ≥ 99,9 %.
+- **Journalisation :** détaillée et corrélée (CAR14).
 
-## PRÉ-CONDITIONS
-1. Connecteurs DME configurés.
-2. API alignées.
-3. RVSQ opérationnelle.
+## 5. PRÉCONDITIONS
+- Connecteurs DME configurés.
+- API alignées et authentifiées.
+- RVSQ opérationnelle.
 
-## POST-CONDITIONS
-1. Index à jour.
-2. Traçabilité des événements.
-3. Recherche reflétant l’état réel.
+## 6. POSTCONDITIONS
+- Index à jour et cohérent.
+- Traçabilité assurée.
 
-## CARACTÉRISTIQUE ASSOCIÉE
+## 7. CARACTÉRISTIQUE ASSOCIÉE
 CAR10 – Synchroniser les disponibilités en temps réel avec les cliniques
