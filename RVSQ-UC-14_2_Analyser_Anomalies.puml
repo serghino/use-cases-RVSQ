@@ -8,18 +8,26 @@ rectangle "Plateforme RVSQ" {
   usecase "Agréger les journaux" as UC142_A
   usecase "Détecter événements anormaux" as UC142_B
   usecase "Générer rapport et notifier" as UC142_C
+  usecase "Traitement différé" as UC142_D
+  usecase "Protocole d'alerte renforcé" as UC142_E
 }
 
 rectangle "Systèmes Externes" {
   usecase "MSSS / RAMQ" as MSSS
 }
 
+' --- Relations principales
 Auditeur --> UC142
 UC142 ..> UC142_A : <<include>>
 UC142 ..> UC142_B : <<include>>
 UC142 ..> UC142_C : <<include>>
 
+' --- Relations externes
 UC142_C ..> MSSS : <<include>>
+
+' --- Extensions conditionnelles
+UC142 ..> UC142_D : <<extend>> : Volume élevé de journaux
+UC142 ..> UC142_E : <<extend>> : Anomalie critique détectée
 
 note top of UC142
   **Caractéristique associée :** CAR14
@@ -28,5 +36,6 @@ end note
 
 note bottom of UC142
   Analyse automatisée et supervision continue des activités suspectes.
+  *Les extensions « Traitement différé » et « Protocole d'alerte renforcé » s'exécutent selon les seuils et criticités définis.*
 end note
 @enduml

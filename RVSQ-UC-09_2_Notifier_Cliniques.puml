@@ -8,6 +8,8 @@ rectangle "Plateforme RVSQ" {
   usecase "Identifier clinique / DME" as UC092_A
   usecase "Construire message" as UC092_B
   usecase "Envoyer notification" as UC092_C
+  usecase "Relancer en cas d'échec" as UC092_D
+  usecase "Utiliser service de messagerie" as UC092_E
 }
 
 rectangle "Systèmes Externes" {
@@ -16,18 +18,26 @@ rectangle "Systèmes Externes" {
 }
 
 RVSQActor --> UC092
+
+' --- Inclusions
 UC092 ..> UC092_A : <<include>>
 UC092 ..> UC092_B : <<include>>
 UC092 ..> UC092_C : <<include>>
 
+' --- Extensions conditionnelles
+UC092 ..> UC092_D : <<extend>>
+UC092 ..> UC092_E : <<extend>> : Canal secondaire
+
+' --- Interactions externes
 UC092_C ..> DME : <<include>>
-UC092_C ..> MSG : <<include>>
+UC092_E ..> MSG : <<include>>
 
 note top of UC092
-  **Caractéristique associée : CAR09**
+  **Caractéristiques associées : CAR09, CAR13, CAR14**
 end note
 
 note bottom of UC092
-  Informer automatiquement les cliniques/DME des changements de rendez-vous.
+  Notification automatique des cliniques/DME lors de tout changement de rendez-vous.
+  *Les extensions « Relancer » et « Utiliser messagerie » s'exécutent seulement en cas d'échec DME.*
 end note
 @enduml

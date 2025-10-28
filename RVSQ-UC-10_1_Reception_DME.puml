@@ -8,6 +8,7 @@ rectangle "Plateforme RVSQ" {
   usecase "Valider l'événement reçu" as UC101_A
   usecase "Intégrer dans l'index central" as UC101_B
   usecase "Journaliser l'opération" as UC101_C
+  usecase "Relancer en cas d'échec" as UC101_D
 }
 
 rectangle "Systèmes Externes" {
@@ -18,14 +19,15 @@ RVSQActor --> UC101
 UC101 ..> UC101_A : <<include>>
 UC101 ..> UC101_B : <<include>>
 UC101 ..> UC101_C : <<include>>
+UC101 ..> UC101_D : <<extend>> : Reprise automatique
 
 UC101_A ..> DME : <<include>>
 
 note top of UC101
-  **Caractéristique associée : CAR10**
+  **Caractéristiques associées : CAR10, CAR13, CAR14**
 end note
 
 note bottom of UC101
-  Réception et intégration en temps réel des disponibilités depuis les DME.
+  Réception, validation et intégration en temps réel des disponibilités depuis les DME.
 end note
 @enduml

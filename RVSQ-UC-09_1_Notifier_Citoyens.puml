@@ -1,33 +1,46 @@
 @startuml RVSQ-UC-09_1_Notifier_Citoyens
 left to right direction
 
+' --- Acteur principal
 actor "Plateforme RVSQ" as RVSQActor <<system>>
 
 rectangle "Plateforme RVSQ" {
   usecase "RVSQ-UC-09.1 : Notifier citoyens" as UC091
   usecase "Identifier citoyens éligibles" as UC091_A
   usecase "Construire message" as UC091_B
-  usecase "Envoyer notification" as UC091_C
+  usecase "Sélectionner canal" as UC091_C
+  usecase "Envoyer notification" as UC091_D
 }
 
+' --- Systèmes externes
 rectangle "Systèmes Externes" {
   usecase "DME" as DME
   usecase "Service de messagerie" as MSG
 }
 
+' --- Acteur humain
+actor "Citoyen" as Citoyen <<person>>
+
+' --- Relations
 RVSQActor --> UC091
 UC091 ..> UC091_A : <<include>>
 UC091 ..> UC091_B : <<include>>
 UC091 ..> UC091_C : <<include>>
+UC091 ..> UC091_D : <<include>>
 
 UC091_A ..> DME : <<include>>
-UC091_C ..> MSG : <<include>>
+UC091_D ..> MSG : <<include>>
+UC091 --> Citoyen
+
+' --- Extension optionnelle (choix du canal)
+UC091 ..> UC091_C : <<extend>> : Si plusieurs canaux configurés
 
 note top of UC091
-  **Caractéristique associée : CAR09**
+  **Caractéristiques associées :** CAR09, CAR13, CAR14
+  **Objectif :** Notifier automatiquement les citoyens éligibles via canaux multi-supports.
 end note
 
 note bottom of UC091
-  Envoyer automatiquement des notifications aux citoyens éligibles.
+  L'extension « Sélectionner canal » est déclenchée uniquement si plusieurs canaux de notification sont configurés.
 end note
 @enduml

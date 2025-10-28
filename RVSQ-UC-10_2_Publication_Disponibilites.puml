@@ -1,33 +1,39 @@
 @startuml RVSQ-UC-10_2_Publication_Disponibilites
 left to right direction
 
+' --- Acteurs humains
+actor "Citoyen" as Citoyen <<person>>
+actor "Médecin" as Medecin <<person>>
+
+' --- Acteur système principal
 actor "Plateforme RVSQ" as RVSQActor <<system>>
 
 rectangle "Plateforme RVSQ" {
-  usecase "RVSQ-UC-10.2 : Publication des mises à jour" as UC102
+  usecase "RVSQ-UC-10.2 : Publication des mises à jour de disponibilités" as UC102
   usecase "Mettre à jour les caches de recherche" as UC102_A
   usecase "Exposer les disponibilités actualisées" as UC102_B
   usecase "Journaliser la publication" as UC102_C
-}
-
-rectangle "Systèmes Externes" {
-  usecase "Citoyen" as Citoyen
-  usecase "Médecin" as Medecin
+  usecase "Recalcul différé" as UC102_D
 }
 
 RVSQActor --> UC102
+Citoyen --> UC102_B
+Medecin --> UC102_B
+
+' --- Inclusions obligatoires
 UC102 ..> UC102_A : <<include>>
 UC102 ..> UC102_B : <<include>>
 UC102 ..> UC102_C : <<include>>
 
-UC102_B ..> Citoyen : <<include>>
-UC102_B ..> Medecin : <<include>>
+' --- Extension conditionnelle
+UC102 ..> UC102_D : <<extend>> : Exécuté si erreur cache / cohérence
 
 note top of UC102
-  **Caractéristique associée : CAR10**
+  **Caractéristiques associées : CAR10, CAR14**
 end note
 
 note bottom of UC102
   Publication en temps réel des disponibilités mises à jour sur la plateforme RVSQ.
+  *L'extension « Recalcul différé » s'exécute uniquement lors d'une incohérence détectée.*
 end note
 @enduml
