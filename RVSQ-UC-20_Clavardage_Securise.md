@@ -1,35 +1,35 @@
-RVSQ-UC-20 : Échanger avec un professionnel via chat sécurisé
+# RVSQ-UC-20 – Clavardage sécurisé
 
-## BRÈVE DESCRIPTION
-Permettre au citoyen et au professionnel de santé d’échanger via un canal de chat chifré et supervisé.
+## 1. BRÈVE DESCRIPTION
+Le **Citoyen** et le **Professionnel de santé** échangent via un canal de clavardage sécurisé géré par la **Plateforme RVSQ**. Les communications sont chiffrées, supervisées et journalisées conformément aux exigences de confidentialité.
 
-## FLUX D'ÉVÉNEMENTS
+## 2. ACTEURS IMPLIQUÉS
+- **Acteurs principaux :** Citoyen, Professionnel de santé
+- **Acteurs secondaires :** Plateforme RVSQ, Service de messagerie sécurisé
 
-### Flux de Base
-1. Initier une session de clavardage.
-2. Authentifier les participants.
-3. Établir le canal chiffré.
-4. Échanger des messages.
-5. Journaliser les métadonnées autorisées.
+## 3. FLUX D'ÉVÉNEMENTS
+### 3.1 Flux nominal
+1. Le citoyen initie une session de clavardage.
+2. Le professionnel de santé est notifié et accepte la session.
+3. La plateforme RVSQ authentifie les participants.
+4. Le canal chiffré est établi (TLS 1.3 + PFS).
+5. Les messages sont échangés et journalisés (métadonnées uniquement).
 
-### Flux Alternatifs
-- **Déconnexion d’un participant** : mettre la session en pause.
-- **Contenu non conforme** : modération et clôture.
+### 3.2 Flux alternatifs
+- **Déconnexion d'un participant :** la session est mise en pause.
+- **Contenu inapproprié :** modération automatique et clôture.
 
-## EXIGENCES SPÉCIALES
-1. Chiffrement de bout en bout.
-2. Rétention conforme.
-3. Notifications en temps réel.
+## 4. EXIGENCES SPÉCIALES
+- Chiffrement de bout en bout.
+- Rétention conforme à la Loi 25.
+- Notifications en temps réel.
 
-## PRÉ-CONDITIONS
-1. Identités vérifiées.
-2. Application mobile/web disponible.
-3. Infra de messagerie opérationnelle.
+## 5. PRÉCONDITIONS
+- Identités vérifiées.
+- Application mobile ou web disponible.
 
-## POST-CONDITIONS
-1. Session établie et sécurisée.
-2. Échanges effectués.
-3. Traçabilité minimale garantie.
+## 6. POSTCONDITIONS
+- Session sécurisée terminée ou archivée.
 
-## CARACTÉRISTIQUE ASSOCIÉE
-CAR20 – Proposer un clavardage sécurisé avec un professionnel de santé
+## 7. CARACTÉRISTIQUE ASSOCIÉE
+CAR20 – Clavardage sécurisé avec un professionnel de santé.

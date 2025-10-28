@@ -1,27 +1,36 @@
 @startuml RVSQ-UC-14_1_Journaliser_Acces
 left to right direction
-actor "Auditeur" as a1
 
-package "Plateforme RVSQ" {
-  usecase "RVSQ-UC-14.1 : Journaliser accès" as UC141
-  usecase "Capturer événement" as UC141_1
-  usecase "Stocker immuablement" as UC141_2
+actor "Plateforme RVSQ" as RVSQActor <<system>>
+actor "Administrateur système" as Admin <<person>>
+actor "Auditeur" as Auditeur <<person>>
+
+rectangle "Plateforme RVSQ" {
+  usecase "RVSQ-UC-14.1 : Journaliser les accès" as UC141
+  usecase "Capturer action sensible" as UC141_A
+  usecase "Enregistrer dans journal immuable" as UC141_B
+  usecase "Rendre accessible à l'audit" as UC141_C
 }
 
-package "Systèmes Externes" {
-  
+rectangle "Systèmes Externes" {
+  usecase "Stockage sécurisé des journaux" as STOR
 }
 
-a1 --> UC141
+RVSQActor --> UC141
+UC141 ..> UC141_A : <<include>>
+UC141 ..> UC141_B : <<include>>
+UC141 ..> UC141_C : <<include>>
 
-UC141 ..> UC141_1 : <<include>>
-UC141 ..> UC141_2 : <<include>>
+UC141_B ..> STOR : <<include>>
+Auditeur --> UC141_C
+Admin --> UC141
 
 note top of UC141
-Journaliser toutes les opérations sensibles pour l’audit.
+  **Caractéristique associée :** CAR14
+  **Objectif :** journaliser tous les accès et actions sensibles dans un journal immuable et horodaté.
 end note
 
 note bottom of UC141
-Caractéristique associée : CAR14
+  Enregistrement automatique et traçabilité complète des actions utilisateurs et systèmes.
 end note
 @enduml

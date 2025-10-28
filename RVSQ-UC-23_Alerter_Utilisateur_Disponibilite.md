@@ -1,35 +1,35 @@
-RVSQ-UC-23 : Alerter l’utilisateur lors d’une disponibilité trouvée
+# RVSQ-UC-23 – Alerter l'utilisateur lors d'une disponibilité trouvée
 
-## BRÈVE DESCRIPTION
-Alerter immédiatement le citoyen lorsqu’un rendez-vous correspondant est détecté, via le canal préféré (SMS, courriel, application) et bascule si besoin.
+## 1. BRÈVE DESCRIPTION
+La **Plateforme RVSQ** alerte le **citoyen** lorsqu'une correspondance est détectée, via le canal préféré (SMS, courriel, notification mobile).
 
-## FLUX D'ÉVÉNEMENTS
+## 2. ACTEURS IMPLIQUÉS
+- **Acteur principal :** Plateforme RVSQ
+- **Acteurs secondaires :** Citoyen, Service de messagerie
 
-### Flux de Base
-1. Émettre l’événement « correspondance trouvée ».
-2. Sélectionner le canal préféré.
-3. Construire le message avec lien d’action.
-4. Envoyer la notification.
-5. Recevoir l’accusé et journaliser.
+## 3. FLUX D'ÉVÉNEMENTS
+### 3.1 Flux nominal
+1. Détecter un événement « correspondance trouvée ».
+2. Identifier les préférences de notification.
+3. Construire le message (contenu, lien de confirmation).
+4. Sélectionner le canal optimal.
+5. Envoyer le message.
+6. Journaliser l'accusé.
 
-### Flux Alternatifs
-- **Canal préféré indisponible** : basculer vers un canal de secours.
-- **Politique anti-spam** : regrouper/étaler les envois.
+### 3.2 Flux alternatifs
+- **Canal préféré indisponible :** basculer vers un autre canal.
+- **Politique anti-spam :** regrouper les envois.
 
-## EXIGENCES SPÉCIALES
-1. Délai bout en bout ≤ 30 s.
-2. Accusé requis.
-3. Messages accessibles et sûrs (liens signés).
+## 4. EXIGENCES SPÉCIALES
+- Délai d'envoi ≤ 30 secondes.
+- Sécurité des messages (liens signés).
+- Confirmation du statut d'envoi.
 
-## PRÉ-CONDITIONS
-1. Préférences configurées.
-2. Fournisseurs SMS/courriel/push intégrés.
-3. RVSQ opérationnelle.
+## 5. PRÉCONDITIONS
+- Citoyen enregistré et préférences définies.
 
-## POST-CONDITIONS
-1. Citoyen alerté à temps.
-2. Statuts tracés.
-3. Lien mène au parcours de confirmation.
+## 6. POSTCONDITIONS
+- Citoyen alerté et lien de confirmation fonctionnel.
 
-## CARACTÉRISTIQUE ASSOCIÉE
-CAR23 – Envoyer des notifications instantanées (SMS, courriel, application mobile)
+## 7. CARACTÉRISTIQUE ASSOCIÉE
+CAR23 – Notifications instantanées (SMS, courriel, application mobile).

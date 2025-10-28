@@ -1,27 +1,33 @@
 @startuml RVSQ-UC-10_2_Publication_Disponibilites
 left to right direction
-actor "Citoyen" as a1
 
-package "Plateforme RVSQ" {
-  usecase "RVSQ-UC-10.2 : Publication MAJ" as UC102
-  usecase "Détecter modification index" as UC102_1
-  usecase "Mettre à jour vues/caches" as UC102_2
+actor "Plateforme RVSQ" as RVSQActor <<system>>
+
+rectangle "Plateforme RVSQ" {
+  usecase "RVSQ-UC-10.2 : Publication des mises à jour" as UC102
+  usecase "Mettre à jour les caches de recherche" as UC102_A
+  usecase "Exposer les disponibilités actualisées" as UC102_B
+  usecase "Journaliser la publication" as UC102_C
 }
 
-package "Systèmes Externes" {
-  
+rectangle "Systèmes Externes" {
+  usecase "Citoyen" as Citoyen
+  usecase "Médecin" as Medecin
 }
 
-a1 --> UC102
+RVSQActor --> UC102
+UC102 ..> UC102_A : <<include>>
+UC102 ..> UC102_B : <<include>>
+UC102 ..> UC102_C : <<include>>
 
-UC102 ..> UC102_1 : <<include>>
-UC102 ..> UC102_2 : <<include>>
+UC102_B ..> Citoyen : <<include>>
+UC102_B ..> Medecin : <<include>>
 
 note top of UC102
-Publier rapidement l’état des disponibilités côté recherche.
+  **Caractéristique associée : CAR10**
 end note
 
 note bottom of UC102
-Caractéristique associée : CAR10
+  Publication en temps réel des disponibilités mises à jour sur la plateforme RVSQ.
 end note
 @enduml

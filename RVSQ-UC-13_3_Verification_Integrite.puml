@@ -1,29 +1,30 @@
 @startuml RVSQ-UC-13_3_Verification_Integrite
 left to right direction
-actor "Citoyen" as a1
 
-package "Plateforme RVSQ" {
-  usecase "RVSQ-UC-13.3 : Vérification d’intégrité" as UC133
-  usecase "Valider signature" as UC133_1
-  usecase "Contrôler horodatage" as UC133_2
-  usecase "Accepter/Refuser message" as UC133_3
+actor "Plateforme RVSQ" as RVSQActor <<system>>
+
+rectangle "Plateforme RVSQ" {
+  usecase "RVSQ-UC-13.3 : Vérification d'intégrité" as UC133
+  usecase "Valider signature et empreinte" as UC133_A
+  usecase "Rejeter altération détectée" as UC133_B
+  usecase "Consigner événement" as UC133_C
 }
 
-package "Systèmes Externes" {
-  
+rectangle "Systèmes Externes" {
+  usecase "DME" as DME
+  usecase "Service de messagerie" as MSG
 }
 
-a1 --> UC133
+RVSQActor --> UC133
+UC133 ..> UC133_A : <<include>>
+UC133 ..> UC133_B : <<include>>
+UC133 ..> UC133_C : <<include>>
 
-UC133 ..> UC133_1 : <<include>>
-UC133 ..> UC133_2 : <<include>>
-UC133 ..> UC133_3 : <<include>>
+UC133_A ..> DME : <<include>>
+UC133_B ..> MSG : <<include>>
 
 note top of UC133
-Vérifier l’intégrité des messages et rejeter toute altération.
-end note
-
-note bottom of UC133
-Caractéristique associée : CAR13
+  **Caractéristique associée :** CAR13  
+  **Objectif :** garantir l'intégrité et la traçabilité des messages échangés.
 end note
 @enduml

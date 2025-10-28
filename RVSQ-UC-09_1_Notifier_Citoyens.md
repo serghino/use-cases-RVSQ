@@ -1,11 +1,14 @@
-RVSQ-UC-09.1 : Notifier les citoyens
+# RVSQ-UC-09.1 – Notifier les citoyens
 
-## BRÈVE DESCRIPTION
-Envoyer automatiquement des notifications au citoyen lorsque des événements pertinents surviennent (ex. libération de créneau correspondant à ses critères).
+## 1. BRÈVE DESCRIPTION
+La **Plateforme RVSQ** envoie automatiquement des notifications multi-canaux (courriel, SMS, notification mobile) aux citoyens éligibles lorsqu’un événement survient (créneau libéré, confirmation, annulation).
 
-## FLUX D'ÉVÉNEMENTS
+## 2. ACTEURS IMPLIQUÉS
+- **Acteur principal :** Plateforme RVSQ
+- **Acteurs secondaires :** DME, Service de messagerie, Citoyen
 
-### Flux de Base
+## 3. FLUX D’ÉVÉNEMENTS
+### 3.1 Flux nominal
 1. Détecter l’événement (créneau libéré).
 2. Identifier les citoyens inscrits correspondants.
 3. Construire le message (contenu, langue, lien d’action).
@@ -13,25 +16,29 @@ Envoyer automatiquement des notifications au citoyen lorsque des événements pe
 5. Envoyer la notification via le service de messagerie.
 6. Recevoir le statut d’envoi et journaliser.
 
-### Flux Alternatifs
-- **Aucun citoyen correspondant** : à l’étape 2, ne rien envoyer et journaliser.
-- **Échec d’envoi** : à l’étape 5, appliquer les relances, puis alerter en cas d’échec définitif.
+### 3.2 Flux alternatifs
+- **A1 — Service de messagerie indisponible :** backoff exponentiel ; si échec, journalisation (CAR14) et alerte.
+- **A2 — Aucune préférence :** envoi par défaut par courriel.
 
-## EXIGENCES SPÉCIALES
-1. Délai de déclenchement ≤ 30 s.
-2. Politique de relance configurable.
-3. Messages accessibles (liens clairs et sécurisés).
-4. Journalisation complète des envois et statuts.
+## 4. EXIGENCES SPÉCIALES
+- **Sécurité :** TLS 1.3 + PFS ; chiffrement du contenu (CAR13).
+- **Traçabilité :** journalisation complète (CAR14).
+- **Disponibilité :** 24/7.
+- **Conformité :** Loi 25 (protection des renseignements personnels).
 
-## PRÉ-CONDITIONS
-1. Préférences citoyen enregistrées.
-2. Intégrations courriel/SMS/app opérationnelles.
-3. Plateforme RVSQ disponible.
+## 5. PRÉCONDITIONS
+- Préférences de notification configurées.
+- DME et service de messagerie accessibles.
 
-## POST-CONDITIONS
-1. Citoyens concernés notifiés.
-2. Statuts d’envoi tracés.
-3. Lien d’action mène au parcours de confirmation.
+## 6. POSTCONDITIONS
+- Notification transmise/consignée.
+- Journal d’envoi archivé.
 
-## CARACTÉRISTIQUE ASSOCIÉE
-CAR09 – Déclencher des notifications automatiques (courriel, SMS, appels)
+## 7. POINTS D’EXTENSION
+- UC23 : Notifications instantanées.
+
+## 8. CARACTÉRISTIQUES CORRESPONDANTES
+CAR09, CAR13, CAR14
+
+## 9. POINTS DE TRAÇABILITÉ
+- CAR09 → UC09.1

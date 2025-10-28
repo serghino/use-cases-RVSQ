@@ -1,34 +1,37 @@
-RVSQ-UC-14.2 : Analyser les anomalies
+# RVSQ-UC-14.2 – Analyser les anomalies
 
-## BRÈVE DESCRIPTION
-Détecter et analyser des événements anormaux afin de prévenir les abus et incidents.
+## 1. BRÈVE DESCRIPTION
+L'**Auditeur** ou l'**Administrateur système** analyse les journaux produits par la **Plateforme RVSQ** pour détecter des événements anormaux et prévenir les abus.
 
-## FLUX D'ÉVÉNEMENTS
+## 2. ACTEURS IMPLIQUÉS
+- **Acteur principal :** Auditeur / Administrateur système
+- **Acteurs secondaires :** Plateforme RVSQ, MSSS/RAMQ (notification externe)
 
-### Flux de Base
-1. Agréger les journaux pertinents.
-2. Appliquer des règles et seuils d’alerte.
-3. Générer des rapports d’anomalies.
-4. Notifier les parties prenantes.
+## 3. FLUX D'ÉVÉNEMENTS
+### 3.1 Flux nominal
+1. Agréger les journaux pertinents depuis les différentes sources.
+2. Appliquer des règles de détection et seuils d'alerte.
+3. Générer des rapports d'anomalies.
+4. Notifier les parties prenantes (RVSQ, MSSS/RAMQ).
 
-### Flux Alternatifs
-- **Faux positif** : marquer et ajuster les règles.
-- **Volume élevé** : échantillonner et prioriser.
+### 3.2 Flux alternatifs
+- **Faux positif :** ajustement des règles et seuils.
+- **Volume élevé :** échantillonnage ou priorisation automatique.
 
-## EXIGENCES SPÉCIALES
-1. Corrélation multi-sources.
-2. Tableaux de bord d’audit.
-3. Conservation des preuves.
+## 4. EXIGENCES SPÉCIALES
+- **Corrélation :** multi-sources et temps réel.
+- **Tableaux de bord :** dédiés à la supervision et l'audit.
+- **Conservation :** des preuves 12 mois minimum.
 
-## PRÉ-CONDITIONS
-1. Journaux disponibles.
-2. Rôles d’audit configurés.
-3. Outils d’analyse opérationnels.
+## 5. PRÉCONDITIONS
+- Journaux disponibles et intègres.
+- Rôles d'audit configurés.
+- Outils d'analyse opérationnels.
 
-## POST-CONDITIONS
-1. Anomalies détectées et tracées.
-2. Alerte envoyée.
-3. Rapport accessible.
+## 6. POSTCONDITIONS
+- Anomalies détectées et tracées.
+- Alertes envoyées.
+- Rapports archivés.
 
-## CARACTÉRISTIQUE ASSOCIÉE
+## 7. CARACTÉRISTIQUE ASSOCIÉE
 CAR14 – Journaliser et tracer tous les accès

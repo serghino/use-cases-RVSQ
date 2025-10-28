@@ -1,27 +1,32 @@
 @startuml RVSQ-UC-14_2_Analyser_Anomalies
 left to right direction
-actor "Auditeur" as a1
 
-package "Plateforme RVSQ" {
-  usecase "RVSQ-UC-14.2 : Analyser anomalies" as UC142
-  usecase "Corréler événements" as UC142_1
-  usecase "Générer rapport" as UC142_2
+actor "Auditeur / Administrateur système" as Auditeur <<person>>
+
+rectangle "Plateforme RVSQ" {
+  usecase "RVSQ-UC-14.2 : Analyser les anomalies" as UC142
+  usecase "Agréger les journaux" as UC142_A
+  usecase "Détecter événements anormaux" as UC142_B
+  usecase "Générer rapport et notifier" as UC142_C
 }
 
-package "Systèmes Externes" {
-  
+rectangle "Systèmes Externes" {
+  usecase "MSSS / RAMQ" as MSSS
 }
 
-a1 --> UC142
+Auditeur --> UC142
+UC142 ..> UC142_A : <<include>>
+UC142 ..> UC142_B : <<include>>
+UC142 ..> UC142_C : <<include>>
 
-UC142 ..> UC142_1 : <<include>>
-UC142 ..> UC142_2 : <<include>>
+UC142_C ..> MSSS : <<include>>
 
 note top of UC142
-Analyser les journaux pour détecter et qualifier les anomalies.
+  **Caractéristique associée :** CAR14
+  **Objectif :** détecter et corréler les anomalies à partir des journaux d'accès RVSQ.
 end note
 
 note bottom of UC142
-Caractéristique associée : CAR14
+  Analyse automatisée et supervision continue des activités suspectes.
 end note
 @enduml

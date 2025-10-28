@@ -1,37 +1,36 @@
-RVSQ-UC-22 : Exécuter moteur automatisé en continu
+# RVSQ-UC-22 – Recherche automatique continue
 
-## BRÈVE DESCRIPTION
-Exécuter 24/24 une recherche selon les critères enregistrés et réserver temporairement un créneau lorsqu’une correspondance est trouvée.
+## 1. BRÈVE DESCRIPTION
+La **Plateforme RVSQ** exécute en continu un moteur de recherche selon les critères enregistrés par le **citoyen** afin de détecter des créneaux libres et d'en réserver temporairement.
 
-## FLUX D'ÉVÉNEMENTS
+## 2. ACTEURS IMPLIQUÉS
+- **Acteur principal :** Plateforme RVSQ
+- **Acteurs secondaires :** Citoyen, DME
 
-### Flux de Base
-1. Enregistrer les critères.
-2. Planifier l’exécution continue.
-3. Interroger régulièrement les DME.
-4. Réserver temporairement les créneaux trouvés.
-5. Notifier l’utilisateur.
-6. Journaliser l’exécution.
+## 3. FLUX D'ÉVÉNEMENTS
+### 3.1 Flux nominal
+1. Lire les critères de recherche enregistrés.
+2. Interroger les DME à intervalles définis.
+3. Détecter une correspondance.
+4. Réserver temporairement le créneau trouvé.
+5. Notifier le citoyen.
+6. Journaliser l'exécution.
 
-### Flux Alternatifs
-- **Aucun résultat** : poursuivre aux intervalles prévus.
-- **Quota DME atteint** : appliquer backoff.
+### 3.2 Flux alternatifs
+- **Aucun résultat :** poursuivre la surveillance.
+- **Quota DME atteint :** appliquer un backoff exponentiel.
 
-## EXIGENCES SPÉCIALES
-1. Disponibilité 24/24.
-2. Détection < 1 min.
-3. Respect des quotas APIs.
-4. Traçabilité complète.
+## 4. EXIGENCES SPÉCIALES
+- Disponibilité 24/24.
+- Délai de détection < 60 secondes.
+- Respect des quotas API DME.
 
-## PRÉ-CONDITIONS
-1. Critères enregistrés.
-2. Intégrations DME opérationnelles.
-3. RVSQ disponible.
+## 5. PRÉCONDITIONS
+- Critères enregistrés.
+- DME intégrés et accessibles.
 
-## POST-CONDITIONS
-1. Correspondances notifiées.
-2. Réservations expirent si non confirmées.
-3. Journaux disponibles.
+## 6. POSTCONDITIONS
+- Notification envoyée si correspondance trouvée.
 
-## CARACTÉRISTIQUE ASSOCIÉE
-CAR22 – Exécuter un moteur de recherche automatisé en continu
+## 7. CARACTÉRISTIQUE ASSOCIÉE
+CAR22 – Moteur de recherche automatisé en continu.

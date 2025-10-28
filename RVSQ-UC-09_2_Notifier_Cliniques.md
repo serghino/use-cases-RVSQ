@@ -1,35 +1,34 @@
-RVSQ-UC-09.2 : Notifier les cliniques
+# RVSQ-UC-09.2 – Notifier les cliniques
 
-## BRÈVE DESCRIPTION
-Informer automatiquement les cliniques lors d’événements opérationnels (ex. annulation, modification critique) afin de faciliter la gestion des plages.
+## 1. BRÈVE DESCRIPTION
+La **Plateforme RVSQ** informe automatiquement les cliniques/DME des nouvelles réservations, modifications ou annulations de rendez-vous.
 
-## FLUX D'ÉVÉNEMENTS
+## 2. ACTEURS IMPLIQUÉS
+- **Acteur principal :** Plateforme RVSQ
+- **Acteurs secondaires :** Cliniques / Hôpitaux (DME), Service de messagerie
 
-### Flux de Base
-1. Détecter l’événement affectant la clinique.
-2. Identifier les destinataires (boîte générique, tableau d’affichage DME).
-3. Construire le message opérationnel.
-4. Sélectionner le canal configuré (courriel institutionnel, webhook DME).
-5. Envoyer la notification et journaliser le statut.
+## 3. FLUX D'ÉVÉNEMENTS
+### 3.1 Flux nominal
+1. Détecter la création/modification/annulation d'un rendez-vous.
+2. Identifier la clinique/DME destinataire.
+3. Construire le message (payload API + résumé lisible).
+4. Transmettre au DME (API REST sécurisée) et, au besoin, via service de messagerie.
+5. Recevoir l'accusé de réception et journaliser.
 
-### Flux Alternatifs
-- **Aucun destinataire configuré** : à l’étape 2, journaliser et créer une alerte de configuration.
-- **Webhook indisponible** : à l’étape 4, basculer vers le courriel.
+### 3.2 Flux alternatifs
+- **A1 — DME non joignable :** relances avec backoff ; si échec, journalisation et alerte.
+- **A2 — Données incohérentes :** rejet et notification à l'administrateur.
 
-## EXIGENCES SPÉCIALES
-1. Délai d’envoi ≤ 60 s.
-2. Redondance des canaux (webhook + courriel).
-3. Conformité rédactionnelle (format institutionnel).
+## 4. EXIGENCES SPÉCIALES
+- **Sécurité :** TLS 1.3 (mutuel) + certificats X.509 (CAR13).
+- **Traçabilité :** logs complets (CAR14).
 
-## PRÉ-CONDITIONS
-1. Contacts cliniques configurés.
-2. Intégrations DME actives.
-3. Plateforme RVSQ disponible.
+## 5. PRÉ/POSTCONDITIONS
+- **Pré :** DME intégré et canal configuré.
+- **Post :** notification confirmée ou échec consigné.
 
-## POST-CONDITIONS
-1. Cliniques informées en temps utile.
-2. Piste d’audit disponible.
-3. Actions correctives possibles.
+## 6. CARACTÉRISTIQUES CORRESPONDANTES
+CAR09, CAR13, CAR14
 
-## CARACTÉRISTIQUE ASSOCIÉE
-CAR09 – Déclencher des notifications automatiques (courriel, SMS, appels)
+## 7. TRAÇABILITÉ
+- CAR09 → UC09.2
