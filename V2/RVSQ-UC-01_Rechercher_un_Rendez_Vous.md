@@ -33,7 +33,7 @@ Ce cas d'utilisation permet à un citoyen de rechercher un rendez-vous médical 
 
 ### Flux Alternatifs
 
-**1. Aucun résultat trouvé**
+**1x. Aucun résultat trouvé**
    - À l'étape 8, si aucun résultat ne correspond aux critères :
      - La plateforme affiche un message indiquant l'absence de résultats dans le système centralisé.
      - La plateforme affiche les critères de recherche appliqués.
@@ -42,7 +42,7 @@ Ce cas d'utilisation permet à un citoyen de rechercher un rendez-vous médical 
      - Retour à l'étape 3.
 
 **2. Modification des critères après affichage des résultats**
-   - Après l'étape 9, le citoyen souhaite affiner ou modifier ses critères :
+   - Après l'étape 9, le citoyen souhaite affiner ou modifier ses critères :∫
      - Le citoyen accède à la section de modification des critères.
      - La plateforme affiche les critères actuels.
      - Le citoyen modifie un ou plusieurs critères/filtres.
@@ -53,7 +53,7 @@ Ce cas d'utilisation permet à un citoyen de rechercher un rendez-vous médical 
      - La plateforme supprime tous les critères et filtres appliqués.
      - La plateforme affiche les champs de recherche vierges avec valeurs par défaut.
      - Retour à l'étape 3.
-
+∫
 **4. Erreur de connexion au système centralisé**
    - À l'étape 7, si le système centralisé est temporairement inaccessible :
      - La plateforme affiche un message d'erreur technique.

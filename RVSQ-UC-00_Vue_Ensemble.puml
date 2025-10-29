@@ -1,0 +1,34 @@
+@startuml RVSQ-UC-00_Vue_Ensemble
+left to right direction
+
+title Vue d'ensemble des cas d'utilisation RVSQ
+
+actor "Citoyen" as Citoyen
+actor "Clinique" as Clinique
+actor "Service d'authentification\ngouvernementale" as SAG
+actor "Plateforme de téléconsultation" as Tele
+
+rectangle "Plateforme RVSQ" {
+  usecase "Rechercher un rendez-vous" as UC_Recherche
+  usecase "Réserver un rendez-vous" as UC_Reservation
+  usecase "Annuler un rendez-vous" as UC_Annulation
+  usecase "Gérer ses préférences" as UC_Preferences
+  usecase "S'authentifier via le SAG" as UC_Authentification
+  usecase "Participer à une téléconsultation" as UC_Teleconsultation
+}
+
+Citoyen -- UC_Recherche
+Citoyen -- UC_Reservation
+Citoyen -- UC_Annulation
+Citoyen -- UC_Preferences
+Citoyen -- UC_Authentification
+Citoyen -- UC_Teleconsultation
+
+Clinique -- UC_Reservation
+Clinique -- UC_Annulation
+
+SAG -- UC_Authentification
+
+Tele -- UC_Teleconsultation
+
+@enduml

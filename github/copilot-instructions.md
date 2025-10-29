@@ -1,6 +1,3 @@
-TABLE DES MATIÈRES
-Normally, a use case specification will not be long enough to warrant a table of contents for the use case. But this element may be required if the use case presents unusual problems in finding portions of the specification.
-
 NOM DU CAS
 
 BRÈVE DESCRIPTION
@@ -35,15 +32,7 @@ Post-conditions
 Postcondition of a use case is a list of possible states the system can be in immediately after a use case has finished.
 1.	Postcondition 1.
 
-Points d’Extension 
-Extension points of the use case.
-1.	Name of extension point.
-
-Definition of the location of the extension point in the flow of events.
-Other Use Case Material.
-
 Contraintes
-1.	Chaque cas d'utilisation doit être associé à une caractéristique.
-2.	Les cas d'utilisation doivent être numérotés de manière unique (par exemple, RVSQ-UC-01).
+1.	Les cas d'utilisation doivent être numérotés de manière unique (par exemple, RVSQ-UC-01).
+2.	Les cas d'utilisation doivent s'aligner avec les acteurs qui définissent les interactions avec la plateforme RVSQ.
 3.	Les cas d'utilisation doivent être rédigés en français clair et compréhensible.
-4.	Les cas d'utilisation peuvent inclure des flux alternatifs pour gérer les scénarios exceptionnels.
