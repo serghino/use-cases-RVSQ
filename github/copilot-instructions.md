@@ -1,3 +1,5 @@
+FORMAT DE CAS D’UTILISATION.
+
 NOM DU CAS
 
 BRÈVE DESCRIPTION
@@ -32,7 +34,34 @@ Post-conditions
 Postcondition of a use case is a list of possible states the system can be in immediately after a use case has finished.
 1.	Postcondition 1.
 
-Contraintes
-1.	Les cas d'utilisation doivent être numérotés de manière unique (par exemple, RVSQ-UC-01).
-2.	Les cas d'utilisation doivent s'aligner avec les acteurs qui définissent les interactions avec la plateforme RVSQ.
-3.	Les cas d'utilisation doivent être rédigés en français clair et compréhensible.
+EXAMPLES D’UTILISATION SELON LE USE CASE DIAGRAM.
+
+Description of Use Cases -Example
+▪
+Name: Reserve lecture hall
+▪
+Short description: An employee reserves a lecture hall at the university for an event.
+▪
+Precondition: The employee is authorized to reserve lecture halls.
+▪
+Postcondition: A lecture hall is reserved.
+▪
+Error situations: There is no free lecture hall.
+▪
+System state in the event of an error: The employee has not reserved a lecture hall.
+▪
+Actors: Employee
+▪
+Trigger: Employee requires a lecture hall.
+▪
+Standard process: 
+(1) Employee logs in to the system.
+(2) Employee selects the lecture hall.
+(3) Employee selects the date.
+(4) System confirms that the lecture hall is free.
+(5) Employee confirms the reservation.
+▪
+Alternative processes: 
+(4’) Lecture hall is not free.
+(5’) System proposes an alternative lecture hall.
+(6’) Employee selects alternative lecture hall and confirms the reservation.

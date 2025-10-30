@@ -4,9 +4,9 @@ left to right direction
 title Vue d'ensemble des cas d'utilisation RVSQ
 
 actor "Citoyen" as Citoyen
+actor "Professionnel de santé" as Professionnel
 actor "Clinique" as Clinique
 actor "Service d'authentification\ngouvernementale" as SAG
-actor "Plateforme de téléconsultation" as Tele
 
 rectangle "Plateforme RVSQ" {
   usecase "Rechercher un rendez-vous" as UC_Recherche
@@ -24,11 +24,13 @@ Citoyen -- UC_Preferences
 Citoyen -- UC_Authentification
 Citoyen -- UC_Teleconsultation
 
+Professionnel -- UC_Reservation
+Professionnel -- UC_Annulation
+Professionnel -- UC_Teleconsultation
+
 Clinique -- UC_Reservation
 Clinique -- UC_Annulation
 
 SAG -- UC_Authentification
-
-Tele -- UC_Teleconsultation
 
 @enduml
