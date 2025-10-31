@@ -1,12 +1,22 @@
 @startuml RVSQ-UC-00_Vue_Ensemble
 left to right direction
+skinparam packageStyle rectangle
+skinparam actorStyle awesome
+skinparam usecase {
+  BackgroundColor #F7F7F7
+  BorderColor #666666
+  FontSize 14
+  FontColor #000000
+}
+skinparam rectangle {
+  BackgroundColor #FFFFFF
+  BorderColor #333333
+  RoundCorner 15
+}
+title **Vue d'ensemble des cas d'utilisation de la Plateforme RVSQ**
 
-title Vue d'ensemble des cas d'utilisation RVSQ
-
-actor "Citoyen" as Citoyen
-actor "Professionnel de santé" as Professionnel
-actor "Clinique" as Clinique
-actor "Service d'authentification\ngouvernementale" as SAG
+actor "👤 Citoyen" as Citoyen
+actor "🩺 Professionnel de santé" as Professionnel
 
 rectangle "Plateforme RVSQ" {
   usecase "Rechercher un rendez-vous" as UC_Recherche
@@ -17,20 +27,17 @@ rectangle "Plateforme RVSQ" {
   usecase "Participer à une téléconsultation" as UC_Teleconsultation
 }
 
-Citoyen -- UC_Recherche
-Citoyen -- UC_Reservation
-Citoyen -- UC_Annulation
-Citoyen -- UC_Preferences
-Citoyen -- UC_Authentification
-Citoyen -- UC_Teleconsultation
+' --- Liens Citoyen
+Citoyen --> UC_Recherche
+Citoyen --> UC_Reservation
+Citoyen --> UC_Annulation
+Citoyen --> UC_Preferences
+Citoyen --> UC_Authentification
+Citoyen --> UC_Teleconsultation
 
-Professionnel -- UC_Reservation
-Professionnel -- UC_Annulation
-Professionnel -- UC_Teleconsultation
-
-Clinique -- UC_Reservation
-Clinique -- UC_Annulation
-
-SAG -- UC_Authentification
+' --- Liens Professionnel
+Professionnel --> UC_Reservation
+Professionnel --> UC_Annulation
+Professionnel --> UC_Teleconsultation
 
 @enduml
