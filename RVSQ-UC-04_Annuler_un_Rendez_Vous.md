@@ -1,7 +1,7 @@
 # RVSQ-UC-04 : Annuler un rendez-vous
 
 ## BRÈVE DESCRIPTION
-Ce cas d'utilisation décrit le processus permettant à un **citoyen** ou à un **professionnel de santé** d'annuler un rendez-vous confirmé via la **plateforme RVSQ**.  
+Ce cas d'utilisation décrit le processus permettant à un **citoyen** ou à un **Adjoint administratif** d'annuler un rendez-vous confirmé via la **plateforme RVSQ**.  
 L'annulation entraîne une mise à jour immédiate des disponibilités dans le système, notifie les parties concernées (citoyen, clinique, DME) et assure la cohérence des informations affichées dans les agendas et les interfaces publiques.
 
 ## FLUX D'ÉVÉNEMENTS
@@ -9,7 +9,7 @@ L'annulation entraîne une mise à jour immédiate des disponibilités dans le s
 ### Flux de Base
 
 1. Le citoyen accède à la section **Mes rendez-vous** de son compte RVSQ.
-    - Le professionnel accède à son **agenda clinique** synchronisé avec le DME via la plateforme RVSQ.
+    - L'adjoint administratif accède à son **agenda clinique** synchronisé avec le DME via la plateforme RVSQ.
 2. Le système affiche la liste des rendez-vous planifiés avec leurs détails (date, heure, type de consultation, statut).
 3. L'utilisateur sélectionne le rendez-vous à annuler.
 4. Le système demande une confirmation explicite de l'action d'annulation.

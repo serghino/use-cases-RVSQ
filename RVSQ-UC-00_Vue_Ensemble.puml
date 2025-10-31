@@ -15,8 +15,16 @@ skinparam rectangle {
 }
 title **Vue d'ensemble des cas d'utilisation de la Plateforme RVSQ**
 
-actor "👤 Citoyen" as Citoyen
-actor "🩺 Professionnel de santé" as Professionnel
+' --- Acteurs
+actor "<&user> Citoyen" as Citoyen
+actor "<&user-md> Professionnel de santé" as Professionnel <<abstract>>
+actor "<&user-md> Médecin" as Medecin
+actor "<&user-nurse> Infirmière" as Infirmiere
+actor "<&id-badge> Adjoint administratif" as Adjoint
+
+' --- Héritages
+Medecin -|> Professionnel
+Infirmiere -|> Professionnel
 
 rectangle "Plateforme RVSQ" {
   usecase "Rechercher un rendez-vous" as UC_Recherche
@@ -35,9 +43,17 @@ Citoyen --> UC_Preferences
 Citoyen --> UC_Authentification
 Citoyen --> UC_Teleconsultation
 
-' --- Liens Professionnel
-Professionnel --> UC_Reservation
-Professionnel --> UC_Annulation
+' --- Liens Professionnels (Médecin/Infirmière)
 Professionnel --> UC_Teleconsultation
+
+' --- Liens Adjoint
+Adjoint --> UC_Annulation
+
+note right of Professionnel
+  **Acteur abstrait :** Professionnel de santé
+  Représente un rôle générique (Médecin, Infirmière)
+  interagissant avec la plateforme RVSQ pour offrir
+   des services de téléconsultation.
+end note
 
 @enduml

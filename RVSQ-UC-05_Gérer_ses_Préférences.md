@@ -20,14 +20,14 @@ Ces préférences concernent notamment la langue, les canaux de notification, le
 6. Le système enregistre les modifications dans la base de données centrale.
 7. Le système applique immédiatement les nouvelles préférences aux modules dépendants (notifications, recherche automatique, etc.).
 8. Une confirmation visuelle s'affiche et une notification est envoyée au citoyen.
-9. L'événement est journalisé pour assurer la traçabilité (CAR14).
+9. L'événement est journalisé pour assurer la traçabilité.
 
 ---
 
 ### Flux Alternatifs
 
 **4'. Erreur de validation**
-- À l'étape 4, si certaines données ne respectent pas les contraintes (ex. numéro de téléphone invalide, champ manquant) :
+- À l'étape 4, si certaines données ne respectent pas les contraintes (ex. champ manquant, format invalide) :
     - Le système met en évidence les champs incorrects.
     - Un message d'erreur explicite s'affiche.
     - Le citoyen corrige les informations.
