@@ -15,16 +15,20 @@ skinparam rectangle {
 }
 title **Vue d'ensemble des cas d'utilisation de la Plateforme RVSQ**
 
-' --- Acteurs
+' --- Acteurs primaires
 actor "<&user> Citoyen" as Citoyen
+actor "<&id-badge> Adjoint administratif" as Adjoint
+
+' --- Professionnel de santé (abstrait) et ses spécialisations
 actor "<&user-md> Professionnel de santé" as Professionnel <<abstract>>
 actor "<&user-md> Médecin" as Medecin
 actor "<&user-nurse> Infirmière" as Infirmiere
-actor "<&id-badge> Adjoint administratif" as Adjoint
+Professionnel <|-- Medecin
+Professionnel <|-- Infirmiere
 
-' --- Héritages
-Medecin -|> Professionnel
-Infirmiere -|> Professionnel
+' --- Acteurs secondaires
+actor "<&shield> Service d'authentification\ngouvernemental" as SAG <<external>>
+actor "<&monitor> Système de\ntéléconsultation" as SysTelecons <<external>>
 
 rectangle "Plateforme RVSQ" {
   usecase "Rechercher un rendez-vous" as UC_Recherche
@@ -48,6 +52,10 @@ Professionnel --> UC_Teleconsultation
 
 ' --- Liens Adjoint
 Adjoint --> UC_Annulation
+
+' --- Liens acteurs secondaires (à droite)
+UC_Authentification --> SAG
+UC_Teleconsultation --> SysTelecons
 
 note right of Professionnel
   **Acteur abstrait :** Professionnel de santé
