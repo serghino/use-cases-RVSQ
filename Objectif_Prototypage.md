@@ -10,7 +10,16 @@ Dans RVSQ, les aspects critiques identifiés sont les **mécanismes de recherche
 
 ## 1.2 Cas d'utilisation ciblés pour le prototypage
 
-Les cas d'utilisation suivants ont été sélectionnés en raison de leur **complexité interactionnelle** et de leur **impact critique** sur l'expérience utilisateur :
+L'objectif du prototype est de valider la partie centrale de RVSQ : le parcours recherche-réservation (RVSQ-UC-01 et RVSQ-UC-02). Ces deux cas d'utilisation forment le cœur de l'expérience citoyen et soulèvent de nombreuses questions qui doivent être clarifiées avant développement :
+• Dans quel ordre présenter les critères de recherche ?
+• Comment gérer l'affichage quand aucun rendez-vous n'est trouvé ?
+• Quelle présentation adopter pour les disponibilités des professionnels ?
+• Quand et comment proposer d'élargir les critères de recherche ?
+• Comment assurer une transition fluide de la recherche vers la réservation ?
+• Quels indicateurs visuels afficher durant les opérations ?
+• …
+
+Le prototype permettra d'identifier les zones d'incertitude et de recueillir les retours utilisateurs sur ce parcours critique, tout en donnant aux parties prenantes une vision concrète de la valeur principale de la plateforme.
 
 ### 1.2.1 RVSQ-UC-01 : Rechercher un rendez-vous
 **Justification :** Ce cas d'utilisation constitue le **point d'entrée principal** de la plateforme et nécessite une attention particulière sur :
