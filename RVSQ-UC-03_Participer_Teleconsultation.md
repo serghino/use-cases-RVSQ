@@ -1,7 +1,7 @@
-RVSQ-UC-03 : Participer à une téléconsultation
+RVSQ-UC-03 : Démarrer une téléconsultation
 
 ## BRÈVE DESCRIPTION
-Permettre à un citoyen de participer à une téléconsultation avec un professionnel de santé via la plateforme RVSQ. Le citoyen accède à la consultation virtuelle à l'heure prévue, se connecte à la plateforme de téléconsultation intégrée, et communique avec le professionnel en temps réel par vidéo, audio et messagerie instantanée.
+Permettre à un citoyen de démarrer une téléconsultation avec un professionnel de santé via la plateforme RVSQ. Le citoyen accède à la consultation virtuelle à l'heure prévue, se connecte à la plateforme de téléconsultation externe (Teams ou Zoom), et communique avec le professionnel en temps réel par vidéo, audio et messagerie instantanée.
 
 ## FLUX D'ÉVÉNEMENTS
 

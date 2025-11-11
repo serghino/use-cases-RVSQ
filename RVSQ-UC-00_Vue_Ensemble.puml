@@ -26,9 +26,8 @@ actor "<&user-nurse> Infirmière" as Infirmiere
 Professionnel <|-- Medecin
 Professionnel <|-- Infirmiere
 
-' --- Acteurs secondaires
-actor "<&shield> Service d'authentification\ngouvernemental" as SAG <<external>>
-actor "<&monitor> Système de\ntéléconsultation" as SysTelecons <<external>>
+actor "<&server>\nService d'authentification\ngouvernemental" as SAG <<systeme externe>>
+actor "<&server>\nSystème de\ntéléconsultation" as SysTelecons <<systeme externe>>
 
 rectangle "Plateforme RVSQ" {
   usecase "Rechercher un rendez-vous" as UC_Recherche
@@ -36,7 +35,7 @@ rectangle "Plateforme RVSQ" {
   usecase "Annuler un rendez-vous" as UC_Annulation
   usecase "Gérer ses préférences" as UC_Preferences
   usecase "S'authentifier via le SAG" as UC_Authentification
-  usecase "Participer à une téléconsultation" as UC_Teleconsultation
+  usecase "Démarrer une téléconsultation" as UC_Teleconsultation
 }
 
 ' --- Liens Citoyen
